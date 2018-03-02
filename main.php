@@ -4,7 +4,7 @@
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author URI: http://hocwp.net/
  * Text Domain: auto-approve-comment
  * Domain Path: /languages/
@@ -48,13 +48,6 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 			'time_interval'
 		) );
 
-		/*
-		$this->add_settings_field( 'interval_max', __( 'Time Interval Max', 'auto-approve-comment' ), array(
-			$this,
-			'time_interval_max'
-		) );
-		*/
-
 		$this->add_settings_field( 'reply', __( 'Auto Reply', 'auto-approve-comment' ), array(
 			$this,
 			'auto_reply'
@@ -75,15 +68,6 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 		<input name="<?php echo $args['name']; ?>[max]" type="number" step="1" min="1"
 		       id="<?php echo $args['label_for']; ?>"
 		       value="<?php echo $max; ?>"
-		       class="small-text"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
-		<?php
-	}
-
-	public function time_interval_max( $args ) {
-		?>
-		<label for="<?php echo $args['label_for']; ?>"></label>
-		<input name="<?php echo $args['name']; ?>" type="number" step="1" min="1" id="<?php echo $args['label_for']; ?>"
-		       value="<?php echo $args['value']; ?>"
 		       class="small-text"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
 		<?php
 	}
@@ -113,11 +97,11 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 			exit;
 		}
 	}
-}
 
-add_action( 'plugins_loaded', function () {
-	global $hocwp_plugin;
-} );
+	public function load_textdomain() {
+		load_plugin_textdomain( 'auto-approve-comment', false, basename( dirname( $this->file ) ) . '/languages/' );
+	}
+}
 
 global $hocwp_plugin;
 
@@ -195,8 +179,8 @@ if ( $plugin instanceof HOCWP_Plugin_Auto_Approve_Comment ) {
 					$interval = hocwp_comment_approve_get_time_interval( $obj_id, $comment_id );
 
 					$count = HP()->get_meta( $obj_id, 'count_interval', true );
-					absint( $count );
-					$count += HOCWP_AAC_INTERVAL;
+					$count = absint( $count );
+					$count += absint( HOCWP_AAC_INTERVAL );
 
 					if ( $count >= $interval ) {
 						hocwp_auto_approve_comment_then_reply( $comment_id, $obj_id );

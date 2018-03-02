@@ -1,10 +1,10 @@
 <?php
-if ( class_exists( 'HOCWP_Plugin' ) ) {
-	return;
-}
-
 if ( ! defined( 'HOCWP_PLUGIN_CORE_VERSION' ) ) {
 	define( 'HOCWP_PLUGIN_CORE_VERSION', '1.0.1' );
+}
+
+if ( class_exists( 'HOCWP_Plugin' ) ) {
+	return;
 }
 
 class HOCWP_Plugin {
@@ -189,6 +189,7 @@ abstract class HOCWP_Plugin_Core {
 		$this->baseurl_custom = trailingslashit( $this->baseurl );
 		$this->baseurl_custom .= 'custom';
 
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'check_license_action' ) );
 		add_action( 'init', array( $this, 'check_upgrade' ) );
 	}
@@ -459,4 +460,6 @@ abstract class HOCWP_Plugin_Core {
 	abstract protected function notify_license_email_subject();
 
 	abstract public function check_license_action();
+
+	abstract public function load_textdomain();
 }

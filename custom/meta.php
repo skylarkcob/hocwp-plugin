@@ -32,14 +32,6 @@ function hocwp_auto_approve_comment_meta_box( $post ) {
 		<input name="aac_interval[max]" id="aac-interval" value="<?php echo $max; ?>"
 		       type="number" min="1" step="1"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
 	</p>
-	<!--
-	<p>
-		<label for="aac-interval-max"
-		       style="display: block"><?php _e( 'Time Interval Max:', 'auto-approve-comment' ); ?></label>
-		<input name="aac_interval_max" id="aac-interval-max" value="<?php echo $max; ?>"
-		       type="number" min="1" step="1"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
-	</p>
-	-->
 	<p>
 		<label for="aac-reply"><?php _e( 'Auto Reply:', 'hocwp-theme' ); ?></label>
 		<textarea name="aac_reply" id="aac-reply" class="widefat"

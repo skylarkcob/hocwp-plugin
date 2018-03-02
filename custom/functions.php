@@ -115,6 +115,17 @@ function hocwp_auto_approve_comment_then_reply( $comment_id, $post_id ) {
 	$ok = wp_set_comment_status( $comment_id, 'approve' );
 
 	if ( $ok ) {
+		$date = current_time( 'mysql' );
+		$gmt  = current_time( 'mysql', true );
+
+		$data = array(
+			'comment_ID'       => $comment_id,
+			'comment_date'     => $date,
+			'comment_date_gmt' => $gmt
+		);
+
+		wp_update_comment( $data );
+
 		hocwp_auto_approve_comment_reply( $comment_id, $post_id );
 
 		update_comment_meta( $comment_id, 'auto_approved', 1 );
