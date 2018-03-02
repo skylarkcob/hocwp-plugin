@@ -90,10 +90,10 @@ function hocwp_auto_approve_comment_init_action() {
 
 add_filter( 'cron_schedules', 'hocwp_auto_approve_comment_cron_schedules_filter' );
 function hocwp_auto_approve_comment_cron_schedules_filter( $schedules ) {
-	if ( ! isset( $schedules['minutely'] ) ) {
-		$schedules['minutely'] = array(
-			'interval' => MINUTE_IN_SECONDS,
-			'display'  => __( 'Once Minutely', 'auto-approve-comment' )
+	if ( ! isset( $schedules['auto_approve_comment'] ) ) {
+		$schedules['auto_approve_comment'] = array(
+			'interval' => HOCWP_AAC_INTERVAL,
+			'display'  => __( 'Once Secondly', 'auto-approve-comment' )
 		);
 	}
 

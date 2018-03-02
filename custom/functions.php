@@ -49,31 +49,29 @@ function hocwp_comment_approve_get_time_interval( $post_id, $comment_id = 0 ) {
 	}
 
 	if ( ! is_numeric( $interval ) ) {
-		$interval = get_post_meta( $post_id, 'aac_interval', true );
+		$value = get_post_meta( $post_id, 'aac_interval', true );
+
+		if ( ! is_array( $value ) ) {
+			$options = get_option( 'hocwp_auto_approve_comment' );
+			$value   = isset( $options['interval'] ) ? $options['interval'] : '';
+		}
+
+		$min = ( is_array( $value ) && isset( $value['min'] ) ) ? $value['min'] : '';
+		$max = ( is_array( $value ) && isset( $value['max'] ) ) ? $value['max'] : '';
+
+		if ( is_numeric( $min ) ) {
+			$interval = $min;
+		}
 
 		if ( ! is_numeric( $interval ) ) {
-			$options  = get_option( 'hocwp_auto_approve_comment' );
-			$interval = isset( $options['interval'] ) ? $options['interval'] : '';
+			$interval = $max;
 		}
 
-		$interval = absint( $interval );
-
-		if ( 1 < $interval ) {
-			$max = get_post_meta( $post_id, 'aac_interval_max', true );
-
-			if ( ! is_numeric( $max ) ) {
-				$options  = get_option( 'hocwp_auto_approve_comment' );
-				$max = isset( $options['interval_max'] ) ? $options['interval_max'] : '';
-			}
-
-			if(!is_numeric($max)) {
-				$max = 1;
-			}
-
-			$interval = rand( $max, $interval );
+		if ( is_numeric( $min ) && is_numeric( $max ) ) {
+			$interval = rand( $min, $max );
 		}
 
-		if ( 0 < $comment_id ) {
+		if ( 0 < $comment_id && is_numeric( $interval ) ) {
 			update_comment_meta( $comment_id, 'aac_interval', $interval );
 		}
 	}

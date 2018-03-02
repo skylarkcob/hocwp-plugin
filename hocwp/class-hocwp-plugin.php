@@ -3,6 +3,10 @@ if ( class_exists( 'HOCWP_Plugin' ) ) {
 	return;
 }
 
+if ( ! defined( 'HOCWP_PLUGIN_CORE_VERSION' ) ) {
+	define( 'HOCWP_PLUGIN_CORE_VERSION', '1.0.1' );
+}
+
 class HOCWP_Plugin {
 	private static $instance = null;
 
@@ -167,6 +171,13 @@ abstract class HOCWP_Plugin_Core {
 			HP()->create_meta_table();
 		}
 
+		$version = get_option( 'hocwp_plugin_core_version' );
+
+		if ( version_compare( $version, HOCWP_PLUGIN_CORE_VERSION, '<' ) ) {
+			update_option( 'hocwp_plugin_core_version', HOCWP_PLUGIN_CORE_VERSION );
+			set_transient( 'hocwp_theme_flush_rewrite_rules', 1 );
+		}
+
 		$this->file     = $file_path;
 		$this->basedir  = dirname( $this->file );
 		$this->baseurl  = plugins_url( '', $this->file );
@@ -179,6 +190,7 @@ abstract class HOCWP_Plugin_Core {
 		$this->baseurl_custom .= 'custom';
 
 		add_action( 'init', array( $this, 'check_license_action' ) );
+		add_action( 'init', array( $this, 'check_upgrade' ) );
 	}
 
 	public function get_root_file_path() {
@@ -433,6 +445,15 @@ abstract class HOCWP_Plugin_Core {
 		$paths   = array_map( 'wp_normalize_path', $paths );
 
 		return $paths;
+	}
+
+	public function check_upgrade() {
+		$flush = get_transient( 'hocwp_theme_flush_rewrite_rules' );
+
+		if ( false !== $flush ) {
+			flush_rewrite_rules();
+			delete_transient( 'hocwp_theme_flush_rewrite_rules' );
+		}
 	}
 
 	abstract protected function notify_license_email_subject();

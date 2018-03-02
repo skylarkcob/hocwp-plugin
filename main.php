@@ -10,6 +10,8 @@
  * Domain Path: /languages/
  */
 
+define( 'HOCWP_AAC_INTERVAL', 5 );
+
 require_once dirname( __FILE__ ) . '/hocwp/class-hocwp-plugin.php';
 
 class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
@@ -46,10 +48,12 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 			'time_interval'
 		) );
 
+		/*
 		$this->add_settings_field( 'interval_max', __( 'Time Interval Max', 'auto-approve-comment' ), array(
 			$this,
 			'time_interval_max'
 		) );
+		*/
 
 		$this->add_settings_field( 'reply', __( 'Auto Reply', 'auto-approve-comment' ), array(
 			$this,
@@ -58,11 +62,20 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 	}
 
 	public function time_interval( $args ) {
+		$value = $args['value'];
+
+		$min = ( is_array( $value ) && isset( $value['min'] ) ) ? $value['min'] : '';
+		$max = ( is_array( $value ) && isset( $value['max'] ) ) ? $value['max'] : '';
 		?>
 		<label for="<?php echo $args['label_for']; ?>"></label>
-		<input name="<?php echo $args['name']; ?>" type="number" step="1" min="1" id="<?php echo $args['label_for']; ?>"
-		       value="<?php echo $args['value']; ?>"
-		       class="small-text"> <?php _e( 'minutes', 'auto-approve-comment' ); ?>
+		<input name="<?php echo $args['name']; ?>[min]" type="number" step="1" min="1"
+		       id="<?php echo $args['label_for']; ?>"
+		       value="<?php echo $min; ?>"
+		       class="small-text"> -
+		<input name="<?php echo $args['name']; ?>[max]" type="number" step="1" min="1"
+		       id="<?php echo $args['label_for']; ?>"
+		       value="<?php echo $max; ?>"
+		       class="small-text"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
 		<?php
 	}
 
@@ -71,7 +84,7 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 		<label for="<?php echo $args['label_for']; ?>"></label>
 		<input name="<?php echo $args['name']; ?>" type="number" step="1" min="1" id="<?php echo $args['label_for']; ?>"
 		       value="<?php echo $args['value']; ?>"
-		       class="small-text"> <?php _e( 'minutes', 'auto-approve-comment' ); ?>
+		       class="small-text"> <?php _e( 'seconds', 'auto-approve-comment' ); ?>
 		<?php
 	}
 
@@ -119,13 +132,13 @@ $plugin = $hocwp_plugin->auto_approve_comment;
 if ( $plugin instanceof HOCWP_Plugin_Auto_Approve_Comment ) {
 	register_activation_hook( $plugin->get_root_file_path(), 'hocwp_auto_approve_comment_schedule_event' );
 	function hocwp_auto_approve_comment_schedule_event() {
-		if ( ! wp_next_scheduled( 'hocwp_auto_approve_comment_minutely' ) ) {
-			wp_schedule_event( time(), 'minutely', 'hocwp_auto_approve_comment_minutely' );
+		if ( ! wp_next_scheduled( 'hocwp_auto_approve_comment_cron' ) ) {
+			wp_schedule_event( time(), 'auto_approve_comment', 'hocwp_auto_approve_comment_cron' );
 		}
 	}
 
-	add_action( 'hocwp_auto_approve_comment_minutely', 'hocwp_auto_approve_comment_minutely' );
-	function hocwp_auto_approve_comment_minutely() {
+	add_action( 'hocwp_auto_approve_comment_cron', 'hocwp_auto_approve_comment_cron' );
+	function hocwp_auto_approve_comment_cron() {
 		global $wpdb;
 
 		if ( ! isset( $wpdb->hocwpmeta ) ) {
@@ -183,7 +196,7 @@ if ( $plugin instanceof HOCWP_Plugin_Auto_Approve_Comment ) {
 
 					$count = HP()->get_meta( $obj_id, 'count_interval', true );
 					absint( $count );
-					$count ++;
+					$count += HOCWP_AAC_INTERVAL;
 
 					if ( $count >= $interval ) {
 						hocwp_auto_approve_comment_then_reply( $comment_id, $obj_id );
@@ -198,6 +211,6 @@ if ( $plugin instanceof HOCWP_Plugin_Auto_Approve_Comment ) {
 
 	register_deactivation_hook( $plugin->get_root_file_path(), 'hocwp_auto_approve_comment_schedule_event_clean' );
 	function hocwp_auto_approve_comment_schedule_event_clean() {
-		wp_clear_scheduled_hook( 'hocwp_auto_approve_comment_minutely' );
+		wp_clear_scheduled_hook( 'hocwp_auto_approve_comment_cron' );
 	}
 }
