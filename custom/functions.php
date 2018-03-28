@@ -80,29 +80,64 @@ function hocwp_comment_approve_get_time_interval( $post_id, $comment_id = 0 ) {
 }
 
 function hocwp_auto_approve_comment_reply( $comment_id, $post_id ) {
+	$tags = '';
+
+	global $hocwp_plugin;
+
+	$plugin = $hocwp_plugin->auto_approve_comment;
+
+	if ( $plugin instanceof HOCWP_Plugin_Auto_Approve_Comment ) {
+		$tags = $plugin->get_option( 'tags' );
+	}
+
 	$reply = '';
 
-	if ( 0 < $post_id ) {
-		$reply = get_post_meta( $post_id, 'aac_reply', true );
+	$comment = get_comment( $comment_id );
+
+	if ( is_array( $tags ) ) {
+		foreach ( $tags as $data ) {
+			if ( isset( $data['tag'] ) && isset( $data['reply'] ) && ! empty( $data['reply'] ) ) {
+				$parts = explode( ',', $data['tag'] );
+
+				array_map( 'trim', $parts );
+
+				foreach ( $parts as $keyword ) {
+					if ( strpos( $comment->comment_content, $keyword ) ) {
+						$reply = $data['reply'];
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	if ( empty( $reply ) ) {
-		$options = get_option( 'hocwp_auto_approve_comment' );
-		$reply   = isset( $options['reply'] ) ? $options['reply'] : '';
+		if ( 0 < $post_id ) {
+			$reply = get_post_meta( $post_id, 'aac_reply', true );
+		}
+
+		if ( empty( $reply ) ) {
+			$options = get_option( 'hocwp_auto_approve_comment' );
+			$reply   = isset( $options['reply'] ) ? $options['reply'] : '';
+		}
 	}
 
 	if ( ! empty( $reply ) ) {
 		$time = current_time( 'mysql' );
 
+		$info = hocwp_aac_get_auto_author();
+
+		$reply = str_replace( '@name@', $comment->comment_author, $reply );
+
 		$data = array(
 			'comment_post_ID'      => $post_id,
-			'comment_author'       => 'Admin',
-			'comment_author_email' => get_bloginfo( 'admin_email', 'display' ),
-			'comment_author_url'   => home_url( '/' ),
+			'comment_author'       => $info['name'],
+			'comment_author_email' => $info['email'],
+			'comment_author_url'   => $info['website'],
 			'comment_content'      => $reply,
 			'comment_type'         => '',
 			'comment_parent'       => $comment_id,
-			'user_id'              => 0,
+			'user_id'              => $info['user_id'],
 			'comment_date'         => $time,
 			'comment_approved'     => 1
 		);
@@ -132,4 +167,75 @@ function hocwp_auto_approve_comment_then_reply( $comment_id, $post_id ) {
 
 		delete_comment_meta( $comment_id, 'auto_approve_timestamp' );
 	}
+}
+
+function hocwp_aac_get_auto_author() {
+	$options = get_option( 'hocwp_auto_approve_comment' );
+	$user_id = isset( $options['auto_author_user_id'] ) ? $options['auto_author_user_id'] : '';
+	$user_id = absint( $user_id );
+
+	$user = get_user_by( 'id', $user_id );
+
+	$name    = isset( $options['auto_author_name'] ) ? $options['auto_author_name'] : '';
+	$email   = isset( $options['auto_author_email'] ) ? $options['auto_author_email'] : '';
+	$website = isset( $options['auto_author_website'] ) ? $options['auto_author_website'] : '';
+
+	if ( $user instanceof WP_User ) {
+		if ( empty( $name ) ) {
+			$name = $user->display_name;
+		}
+
+		if ( ! is_email( $email ) ) {
+			$email = $user->user_email;
+		}
+
+		if ( empty( $website ) ) {
+			$website = $user->user_url;
+		}
+	} else {
+		if ( empty( $name ) ) {
+			$name = get_bloginfo( 'name' );
+		}
+
+		if ( ! is_email( $email ) ) {
+			//$email = get_bloginfo( 'admin_email' );
+		}
+
+		if ( empty( $website ) ) {
+			//$website = home_url( '/' );
+		}
+	}
+
+	$result = array(
+		'name'    => $name,
+		'email'   => $email,
+		'website' => $website,
+		'user_id' => $user_id
+	);
+
+	return $result;
+}
+
+function hocwp_plugin_aac_get_string_between( $string, $start, $end, $from_last = false ) {
+	$string = ' ' . $string;
+
+	if ( $from_last ) {
+		$ini = strrpos( $string, $start );
+	} else {
+		$ini = strpos( $string, $start );
+	}
+
+	if ( $ini == 0 ) {
+		return '';
+	}
+
+	$ini += strlen( $start );
+
+	if ( $from_last ) {
+		$len = strrpos( $string, $end, $ini ) - $ini;
+	} else {
+		$len = strpos( $string, $end, $ini ) - $ini;
+	}
+
+	return substr( $string, $ini, $len );
 }

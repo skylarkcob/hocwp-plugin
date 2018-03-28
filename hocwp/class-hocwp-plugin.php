@@ -198,6 +198,10 @@ abstract class HOCWP_Plugin_Core {
 		return $this->file;
 	}
 
+	public function get_baseurl() {
+		return $this->baseurl;
+	}
+
 	public function set_option_name( $name ) {
 		$this->option_name = $name;
 	}
@@ -455,6 +459,20 @@ abstract class HOCWP_Plugin_Core {
 			flush_rewrite_rules();
 			delete_transient( 'hocwp_theme_flush_rewrite_rules' );
 		}
+	}
+
+	public function admin_setting_field_input( $args ) {
+		$value = $args['value'];
+		$type  = isset( $args['type'] ) ? $args['type'] : 'text';
+		$id    = isset( $args['label_for'] ) ? $args['label_for'] : '';
+		$name  = isset( $args['name'] ) ? $args['name'] : '';
+		?>
+		<label for="<?php echo esc_attr( $id ); ?>"></label>
+		<input name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>"
+		       id="<?php echo esc_attr( $id ); ?>"
+		       value="<?php echo esc_attr( $value ); ?>"
+		       class="regular-text">
+		<?php
 	}
 
 	abstract protected function notify_license_email_subject();

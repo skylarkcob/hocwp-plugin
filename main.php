@@ -4,7 +4,7 @@
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
- * Version: 1.0.2
+ * Version: 1.0.7
  * Author URI: http://hocwp.net/
  * Text Domain: auto-approve-comment
  * Domain Path: /languages/
@@ -52,6 +52,63 @@ class HOCWP_Plugin_Auto_Approve_Comment extends HOCWP_Plugin_Core {
 			$this,
 			'auto_reply'
 		) );
+
+		$this->add_settings_section( 'auto_author', __( 'Auto Reply Author', 'auto-approve-comment' ), array(
+			$this,
+			'auto_author_section'
+		) );
+
+		$this->add_settings_field( 'auto_author_user_id', __( 'User', 'auto-approve-comment' ), array(
+			$this,
+			'auto_author_user_id'
+		), 'auto_author' );
+
+		$this->add_settings_field( 'auto_author_name', __( 'Name', 'auto-approve-comment' ), array(
+			$this,
+			'auto_author_name'
+		), 'auto_author' );
+
+		$args = array(
+			'type' => 'email'
+		);
+		$this->add_settings_field( 'auto_author_email', __( 'Email', 'auto-approve-comment' ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'auto_author', $args );
+
+		$args['type'] = 'url';
+		$this->add_settings_field( 'auto_author_website', __( 'Website', 'auto-approve-comment' ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'auto_author', $args );
+	}
+
+	public function auto_author_section( $args ) {
+
+	}
+
+	public function auto_author_user_id( $args ) {
+		$users = get_users();
+		$value = $args['value'];
+		?>
+		<label for="<?php echo esc_attr( $args['label_for'] ); ?>"></label>
+		<select id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		        name="<?php echo esc_attr( $args['name'] ); ?>">
+			<option value=""><?php _e( '-- Choose user --', 'auto-approve-comment' ); ?></option>
+			<?php
+			foreach ( $users as $user ) {
+				?>
+				<option
+					value="<?php echo $user->ID; ?>"<?php selected( $value, $user->ID ); ?>><?php echo $user->display_name; ?></option>
+				<?php
+			}
+			?>
+		</select>
+		<?php
+	}
+
+	public function auto_author_name( $args ) {
+		$this->admin_setting_field_input( $args );
 	}
 
 	public function time_interval( $args ) {
