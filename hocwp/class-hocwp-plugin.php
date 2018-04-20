@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'HOCWP_PLUGIN_CORE_VERSION' ) ) {
+	define( 'HOCWP_PLUGIN_CORE_VERSION', '1.0.2' );
+}
+
 if ( class_exists( 'HOCWP_Plugin' ) ) {
 	return;
 }
@@ -161,10 +165,18 @@ abstract class HOCWP_Plugin_Core {
 	protected $labels;
 	protected $setting_args;
 	protected $options_page_callback;
+	protected $textdomain;
 
 	public function __construct( $file_path ) {
 		if ( is_admin() ) {
 			HP()->create_meta_table();
+		}
+
+		$version = get_option( 'hocwp_plugin_core_version' );
+
+		if ( version_compare( $version, HOCWP_PLUGIN_CORE_VERSION, '<' ) ) {
+			update_option( 'hocwp_plugin_core_version', HOCWP_PLUGIN_CORE_VERSION );
+			set_transient( 'hocwp_theme_flush_rewrite_rules', 1 );
 		}
 
 		$this->file     = $file_path;
@@ -178,11 +190,17 @@ abstract class HOCWP_Plugin_Core {
 		$this->baseurl_custom = trailingslashit( $this->baseurl );
 		$this->baseurl_custom .= 'custom';
 
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		add_action( 'init', array( $this, 'check_license_action' ) );
+		add_action( 'init', array( $this, 'check_upgrade' ) );
 	}
 
 	public function get_root_file_path() {
 		return $this->file;
+	}
+
+	public function get_baseurl() {
+		return $this->baseurl;
 	}
 
 	public function set_option_name( $name ) {
@@ -235,6 +253,14 @@ abstract class HOCWP_Plugin_Core {
 		$this->options_page_callback = $callback;
 	}
 
+	public function set_textdomain( $domain ) {
+		$this->textdomain = $domain;
+	}
+
+	public function get_textdomain() {
+		return $this->textdomain;
+	}
+
 	public function init() {
 		$path = $this->basedir_custom . '/functions.php';
 
@@ -261,6 +287,12 @@ abstract class HOCWP_Plugin_Core {
 			}
 
 			$path = $this->basedir_custom . '/meta.php';
+
+			if ( file_exists( $path ) ) {
+				require $path;
+			}
+
+			$path = $this->basedir_custom . '/ajax.php';
 
 			if ( file_exists( $path ) ) {
 				require $path;
@@ -401,6 +433,8 @@ abstract class HOCWP_Plugin_Core {
 
 		if ( file_exists( $path ) ) {
 			include $path;
+		} else {
+			include $this->basedir . '/hocwp/views/admin-setting-page.php';
 		}
 	}
 
@@ -435,7 +469,48 @@ abstract class HOCWP_Plugin_Core {
 		return $paths;
 	}
 
-	abstract protected function notify_license_email_subject();
+	public function check_upgrade() {
+		$flush = get_transient( 'hocwp_theme_flush_rewrite_rules' );
 
-	abstract public function check_license_action();
+		if ( false !== $flush ) {
+			flush_rewrite_rules();
+			delete_transient( 'hocwp_theme_flush_rewrite_rules' );
+		}
+	}
+
+	public function admin_setting_field_input( $args ) {
+		$value = $args['value'];
+		$type  = isset( $args['type'] ) ? $args['type'] : 'text';
+		$id    = isset( $args['label_for'] ) ? $args['label_for'] : '';
+		$name  = isset( $args['name'] ) ? $args['name'] : '';
+		?>
+		<label for="<?php echo esc_attr( $id ); ?>"></label>
+		<input name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>"
+		       id="<?php echo esc_attr( $id ); ?>"
+		       value="<?php echo esc_attr( $value ); ?>"
+		       class="regular-text">
+		<?php
+	}
+
+	public function load_textdomain() {
+		load_plugin_textdomain( $this->get_textdomain(), false, basename( dirname( $this->file ) ) . '/languages/' );
+	}
+
+	public function sanitize_callbacks( $input ) {
+		return $input;
+	}
+
+	public function notify_license_email_subject() {
+		return $this->labels['license']['notify']['email_subject'];
+	}
+
+	public function check_license_action() {
+		$check = $this->check_license();
+
+		if ( ! $check ) {
+			$msg = $this->labels['license']['die_message'];
+			wp_die( $msg, $this->labels['license']['die_title'] );
+			exit;
+		}
+	}
 }

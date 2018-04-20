@@ -1,7 +1,7 @@
-=== Auto Approve Comment ===
+=== Auto Add Post ===
 Contributors: skylarkcob, hocwp, sauhi
 Donate link: http://hocwp.net/donate/
-Tags: hocwp, hocwp theme, media filter, attachment filter
+Tags: hocwp, hocwp theme, add post, create post
 Requires PHP: 7.0
 Requires at least: 4.8
 Tested up to: 4.9
@@ -20,7 +20,7 @@ This section describes how to install the plugin and get it working. Now you can
 1. Download plugin from WordPress Plugins directory and extract it.
 2. Upload the plugin to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 3. Activate the plugin through the 'Plugins' screen in WordPress.
-4. Use the `Settings → Auto Approve Comment` screen to configure the plugin.
+4. Use the `Settings → Auto Add Post` screen to configure the plugin.
 
 == Frequently Asked Questions ==
 
