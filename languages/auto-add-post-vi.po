@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WooCommerce package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Auto Approve Comment\n"
+"Project-Id-Version: Auto Add Post\n"
 "Report-Msgid-Bugs-To: https://github.com/woocommerce/woocommerce/"
 "issues\n"
 "POT-Creation-Date: 2018-03-03 10:14+0700\n"
@@ -27,7 +27,7 @@ msgid "General Settings"
 msgstr "Cài đặt chung"
 
 #: custom/admin-setting-page-display.php:23 main.php:26
-msgid "Auto Approve Comment by HocWP Team"
+msgid "Auto Add Post by HocWP Team"
 msgstr "Tự Động Duyệt Bình Luận bởi HocWP Team"
 
 #: custom/hook.php:96
@@ -35,7 +35,7 @@ msgid "Once Secondly"
 msgstr "Mỗi giây một lần"
 
 #: custom/meta.php:11 main.php:27
-msgid "Auto Approve Comment"
+msgid "Auto Add Post"
 msgstr "Tự động duyệt bình luận"
 
 #: custom/meta.php:29

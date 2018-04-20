@@ -3,7 +3,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Auto Approve Comment\n"
+"Project-Id-Version: Auto Add Post\n"
 "Report-Msgid-Bugs-To: https://github.com/woocommerce/woocommerce/issues\n"
 "POT-Creation-Date: 2018-03-02 14:17+0700\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgid "General Settings"
 msgstr ""
 
 #: custom/admin-setting-page-display.php:23 main.php:26
-msgid "Auto Approve Comment by HocWP Team"
+msgid "Auto Add Post by HocWP Team"
 msgstr ""
 
 #: custom/hook.php:96
@@ -31,7 +31,7 @@ msgid "Once Secondly"
 msgstr ""
 
 #: custom/meta.php:11 main.php:27
-msgid "Auto Approve Comment"
+msgid "Auto Add Post"
 msgstr ""
 
 #: custom/meta.php:29

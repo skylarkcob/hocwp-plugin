@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'HOCWP_PLUGIN_CORE_VERSION' ) ) {
-	define( 'HOCWP_PLUGIN_CORE_VERSION', '1.0.1' );
+	define( 'HOCWP_PLUGIN_CORE_VERSION', '1.0.2' );
 }
 
 if ( class_exists( 'HOCWP_Plugin' ) ) {
@@ -165,6 +165,7 @@ abstract class HOCWP_Plugin_Core {
 	protected $labels;
 	protected $setting_args;
 	protected $options_page_callback;
+	protected $textdomain;
 
 	public function __construct( $file_path ) {
 		if ( is_admin() ) {
@@ -252,6 +253,14 @@ abstract class HOCWP_Plugin_Core {
 		$this->options_page_callback = $callback;
 	}
 
+	public function set_textdomain( $domain ) {
+		$this->textdomain = $domain;
+	}
+
+	public function get_textdomain() {
+		return $this->textdomain;
+	}
+
 	public function init() {
 		$path = $this->basedir_custom . '/functions.php';
 
@@ -278,6 +287,12 @@ abstract class HOCWP_Plugin_Core {
 			}
 
 			$path = $this->basedir_custom . '/meta.php';
+
+			if ( file_exists( $path ) ) {
+				require $path;
+			}
+
+			$path = $this->basedir_custom . '/ajax.php';
 
 			if ( file_exists( $path ) ) {
 				require $path;
@@ -418,6 +433,8 @@ abstract class HOCWP_Plugin_Core {
 
 		if ( file_exists( $path ) ) {
 			include $path;
+		} else {
+			include $this->basedir . '/hocwp/views/admin-setting-page.php';
 		}
 	}
 
@@ -475,9 +492,25 @@ abstract class HOCWP_Plugin_Core {
 		<?php
 	}
 
-	abstract protected function notify_license_email_subject();
+	public function load_textdomain() {
+		load_plugin_textdomain( $this->get_textdomain(), false, basename( dirname( $this->file ) ) . '/languages/' );
+	}
 
-	abstract public function check_license_action();
+	public function sanitize_callbacks( $input ) {
+		return $input;
+	}
 
-	abstract public function load_textdomain();
+	public function notify_license_email_subject() {
+		return $this->labels['license']['notify']['email_subject'];
+	}
+
+	public function check_license_action() {
+		$check = $this->check_license();
+
+		if ( ! $check ) {
+			$msg = $this->labels['license']['die_message'];
+			wp_die( $msg, $this->labels['license']['die_title'] );
+			exit;
+		}
+	}
 }
