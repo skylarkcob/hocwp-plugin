@@ -1,16 +1,21 @@
 <?php
 
 /**
- * Plugin Name: Auto Thumbnail
+ * Plugin Name: FTP Upload ACF
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
  * Version: 1.0.0
  * Author URI: http://facebook.com/hocwpnet/
- * Text Domain: auto-thumbnail
+ * Text Domain: ftp-upload-acf
  * Domain Path: /languages/
  */
-class Auto_Thumbnail {
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+class FTP_Upload_ACF {
 	protected static $instance;
 
 	protected $plugin_file = __FILE__;
@@ -31,6 +36,80 @@ class Auto_Thumbnail {
 
 	public function is_empty_string( $string ) {
 		return ( is_string( $string ) && empty( $string ) );
+	}
+
+	public function size_in_bytes( $size ) {
+		$result = floatval( trim( $size ) );
+
+		$last = strtolower( $size[ strlen( $size ) - 1 ] );
+
+		switch ( $last ) {
+			case 'g':
+				$result *= 1024 * 1024 * 1024;
+				break;
+			case 'm':
+				$result *= 1024 * 1024;
+				break;
+			case 'k':
+				$result *= 1024;
+				break;
+		}
+
+		return $result;
+	}
+
+	public function json_string_to_array( $json_string ) {
+		if ( is_string( $json_string ) ) {
+			$json_string = stripslashes( $json_string );
+			$json_string = json_decode( $json_string, true );
+		}
+
+		return $json_string;
+	}
+
+	public function get_upload_max_file_size() {
+		$max_upload   = $this->size_in_bytes( ini_get( 'upload_max_filesize' ) );
+		$max_post     = $this->size_in_bytes( ini_get( 'post_max_size' ) );
+		$memory_limit = $this->size_in_bytes( ini_get( 'memory_limit' ) );
+
+		return min( $max_upload, $max_post, $memory_limit );
+	}
+
+	public function ftp_connect( $host, $user, $password, $port = 21 ) {
+		$conn_id = @ftp_connect( $host, $port );
+
+		if ( $conn_id ) {
+			$logged_in = @ftp_login( $conn_id, $user, $password );
+
+			if ( $logged_in ) {
+				return $conn_id;
+			}
+		}
+
+		return false;
+	}
+
+	public function ftp_upload( $file, $host, $user, $password, $port = 21 ) {
+		if ( is_array( $file ) && isset( $file['tmp_name'] ) ) {
+			$conn = $this->ftp_connect( $host, $user, $password, $port );
+
+			if ( false !== $conn ) {
+				@ftp_pwd( $conn );
+				@ftp_chdir( $conn, '~' );
+				$new_name = $file['name'];
+				$info     = pathinfo( $new_name );
+
+				if ( isset( $info['extension'] ) && ! empty( $info['extension'] ) ) {
+					$new_name = $info['filename'] . '-' . current_time( 'timestamp' ) . '.' . $info['extension'];
+				}
+
+				$uploaded = @ftp_put( $conn, $new_name, $file['tmp_name'], FTP_BINARY );
+
+				@ftp_close( $conn );
+			}
+		}
+
+		return false;
 	}
 
 	public function is_string_empty( $string ) {
@@ -506,6 +585,48 @@ class Auto_Thumbnail {
 		$this->field_description( $args );
 	}
 
+	public function admin_setting_field_select( $args ) {
+		$value   = $args['value'];
+		$id      = isset( $args['label_for'] ) ? $args['label_for'] : '';
+		$name    = isset( $args['name'] ) ? $args['name'] : '';
+		$options = isset( $args['options'] ) ? $args['options'] : '';
+
+		$option_none = isset( $args['option_none'] ) ? $args['option_none'] : '';
+		?>
+		<label for="<?php echo esc_attr( $id ); ?>"></label>
+		<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>" class="widefat">
+			<?php
+			if ( empty( $option_none ) ) {
+				?>
+				<option value=""></option>
+				<?php
+			} else {
+				echo $option_none;
+			}
+
+			if ( is_array( $options ) ) {
+				foreach ( $options as $key => $data ) {
+					$current = $key;
+					$text    = is_string( $data ) ? $data : '';
+
+					if ( is_array( $data ) ) {
+						$current = isset( $data['value'] ) ? $data['value'] : '';
+						$text    = isset( $data['text'] ) ? $data['text'] : '';
+					}
+					?>
+					<option
+						value="<?php echo esc_attr( $current ); ?>"<?php selected( $value, $current ); ?>><?php echo $text; ?></option>
+					<?php
+				}
+			} elseif ( is_string( $options ) ) {
+				echo $options;
+			}
+			?>
+		</select>
+		<?php
+		$this->field_description( $args );
+	}
+
 	public function admin_setting_field_media_upload( $args ) {
 		$value = $args['value'];
 		$type  = isset( $args['type'] ) ? $args['type'] : 'text';
@@ -630,113 +751,459 @@ class Auto_Thumbnail {
 
 		if ( is_admin() ) {
 			add_action( 'admin_init', array( $this, 'custom_admin_init_action' ) );
+
+			add_action( 'wp_ajax_ftp_upload_acf_test_connection', array( $this, 'test_connection_ajax_callback' ) );
+			add_action( 'wp_ajax_nopriv_ftp_upload_acf_test_connection', array(
+				$this,
+				'test_connection_ajax_callback'
+			) );
+
+			add_action( 'wp_ajax_ftp_upload_acf_get_mime_icon', array(
+				$this,
+				'get_mime_icon_ajax_callback'
+			) );
+			add_action( 'wp_ajax_nopriv_ftp_upload_acf_get_mime_icon', array(
+				$this,
+				'get_mime_icon_ajax_callback'
+			) );
+
+			add_action( 'wp_ajax_ftp_upload_acf_upload_file', array(
+				$this,
+				'upload_file_ajax_callback'
+			) );
+			add_action( 'wp_ajax_nopriv_ftp_upload_acf_upload_file', array(
+				$this,
+				'upload_file_ajax_callback'
+			) );
+		} else {
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'acf/render_field/type=file', array( $this, 'add_input_file' ) );
 		}
 
-		add_filter( 'post_thumbnail_html', array( $this, 'post_thumbnail_html_filter' ), 10, 5 );
+		add_shortcode( 'ftp_upload_acf', array( $this, 'shortcode' ) );
+		add_filter( 'wp_mime_type_icon', array( $this, 'mime_type_icon_filter' ), 10, 2 );
 	}
 
-	public function sanitize_exclude_name( $name ) {
-		return basename( $name );
-	}
+	public function upload_file_ajax_callback() {
+		$data = array();
 
-	public function get_exclude_images() {
-		$exclude = $this->get_option( 'exclude' );
+		$file = isset( $_FILES['file'] ) ? $_FILES['file'] : isset( $_POST['file'] ) ? $_POST['file'] : isset( $_POST['custom_file'] ) ? $_POST['custom_file'] : '';
 
-		if ( ! empty( $exclude ) ) {
-			$exclude = explode( "\r\n", $exclude );
+		if ( is_string( $file ) && ! empty( $file ) ) {
+			$file = maybe_unserialize( $file );
 
-			return array_map( array( $this, 'sanitize_exclude_name' ), $exclude );
+			if ( ! is_array( $file ) ) {
+				$file = $this->json_string_to_array( $file );
+			}
 		}
 
-		return array();
+		if ( is_array( $file ) ) {
+			$host     = isset( $_POST['ftp_host'] ) ? $_POST['ftp_host'] : $this->get_option( 'ftp_host' );
+			$user     = isset( $_POST['ftp_user'] ) ? $_POST['ftp_user'] : $this->get_option( 'ftp_user' );
+			$password = isset( $_POST['ftp_password'] ) ? $_POST['ftp_password'] : $this->get_option( 'ftp_password' );
+			$port     = isset( $_POST['ftp_port'] ) ? $_POST['ftp_port'] : $this->get_option( 'ftp_port', 21 );
+
+			$this->ftp_upload( $file, $host, $user, $password, $port );
+
+			wp_send_json_success( $data );
+		}
+
+		wp_send_json_error();
 	}
 
-	public function get_thumbnail_from_string( $string ) {
-		$result = '';
+	public function get_mime_type_icon( $file_name ) {
+		return trailingslashit( $this->base_url ) . $file_name;
+	}
 
-		if ( ! empty( $string ) ) {
-			$images = $this->get_all_image_from_string( $string, 'url' );
+	public function mime_type_icon_filter( $icon, $mime ) {
+		switch ( $mime ) {
+			case 'application/pdf':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-pdf.png' );
+				break;
+			case 'application/vnd.ms-word.document.macroEnabled.12':
+			case 'application/vnd.openxmlformats-officedocument.wordprocessingml.template':
+			case 'application/vnd.ms-word.template.macroEnabled.12':
+			case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			case 'application/msword':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-doc.png' );
+				break;
+			case 'application/rar':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-rar.png' );
+				break;
+			case 'application/zip':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-zip.png' );
+				break;
+			case 'application/x-gzip':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-gz.png' );
+				break;
+			case 'application/x-7z-compressed':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-7z.png' );
+				break;
+			case 'application/vnd.ms-excel.addin.macroEnabled.12':
+			case 'application/vnd.ms-excel.template.macroEnabled.12':
+			case 'application/vnd.ms-excel.sheet.binary.macroEnabled.12':
+			case 'application/vnd.ms-excel.sheet.macroEnabled.12':
+			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			case 'application/vnd.ms-excel':
+				$icon = $this->get_mime_type_icon( 'mime-types/icon-xls.png' );
+				break;
+		}
 
-			if ( $this->array_has_value( $images ) ) {
-				$exclude = $this->get_exclude_images();
+		return $icon;
+	}
 
-				$first = '';
+	public function get_mime_icon_ajax_callback() {
+		$data = array();
 
-				foreach ( $images as $image ) {
-					$name = $this->sanitize_exclude_name( $image );
+		$name = isset( $_GET['name'] ) ? $_GET['name'] : '';
 
-					if ( ! $this->array_has_value( $exclude ) || ( $this->array_has_value( $exclude ) && false === array_search( $name, $exclude ) ) ) {
-						$result = $image;
-						break;
-					} else {
-						if ( empty( $first ) ) {
-							$first = $image;
-						}
+		if ( ! empty( $name ) ) {
+			$types = wp_check_filetype( $name );
+
+			if ( isset( $types['type'] ) ) {
+				$icon = wp_mime_type_icon( $types['type'] );
+
+				if ( ! empty( $icon ) ) {
+					$data['icon'] = $icon;
+
+					wp_send_json_success( $data );
+				}
+			}
+		}
+
+		wp_send_json_error( $data );
+	}
+
+	public function test_connection_ajax_callback() {
+		$data = array();
+
+		$host     = isset( $_GET['host'] ) ? $_GET['host'] : '';
+		$port     = isset( $_GET['port'] ) ? $_GET['port'] : 21;
+		$user     = isset( $_GET['user'] ) ? $_GET['user'] : '';
+		$password = isset( $_GET['password'] ) ? $_GET['password'] : '';
+
+		$conn = $this->ftp_connect( $host, $user, $password, $port );
+
+		if ( false !== $conn ) {
+			wp_send_json_success( $data );
+		}
+
+		wp_send_json_error( $data );
+	}
+
+	public function add_input_file( $field ) {
+		$name = isset( $field['name'] ) ? $field['name'] : '';
+
+		if ( empty( $name ) ) {
+			//$this->debug( $field );
+		}
+
+		$value = '';
+
+		if ( isset( $field['file_id'] ) && $this->is_positive_number( $field['file_id'] ) ) {
+			$value = get_attached_file( $field['file_id'] );
+
+			$value = array(
+				'name'     => basename( $value ),
+				'type'     => mime_content_type( $value ),
+				'tmp_name' => $value,
+				'error'    => 0,
+				'size'     => filesize( $value )
+			);
+		}
+		?>
+		<input type="file" name="<?php echo $name; ?>_file"
+		       data-value="<?php echo esc_attr( json_encode( $value ) ); ?>"
+		       data-for="<?php echo $name; ?>" style="display: none">
+		<div class="progress-bar">
+			<span class="label">0%</span>
+			<span class="background completed"></span>
+			<span class="background uploading"></span>
+		</div>
+		<?php
+	}
+
+	public function enqueue_scripts() {
+		wp_enqueue_style( 'ftp-upload-acf-style', $this->base_url . '/style.css', array( 'acf-field-group' ) );
+		wp_enqueue_script( 'ftp-upload-acf', $this->base_url . '/script.js', array(
+			'jquery',
+			'acf-field-group'
+		), false, true );
+
+		$l10n = array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'maxSize' => $this->get_upload_max_file_size(),
+			'l10n'    => array(
+				'connectionError'   => __( 'FTP connection information not valid!', $this->textdomain ),
+				'connectionSuccess' => __( 'FTP connection information valid!', $this->textdomain ),
+				'noFileSelected'    => __( 'No files selected.', $this->textdomain ),
+				'maxSizeError'      => sprintf( __( 'You can only upload file less than %s.', $this->textdomain ), size_format( $this->get_upload_max_file_size() ) )
+			)
+		);
+
+		wp_localize_script( 'ftp-upload-acf', 'ftpUploadAcf', $l10n );
+	}
+
+	public function ftp_connection_section_callback() {
+		echo wpautop( __( 'The default information for user connecting into FTP Server.', $this->textdomain ) );
+	}
+
+	public function custom_admin_init_action() {
+		$this->add_settings_section( 'ftp_connection_info', __( 'FTP Connection Information', $this->textdomain ), array(
+			$this,
+			'ftp_connection_section_callback'
+		) );
+
+		$args = array();
+
+		$this->add_settings_field( 'ftp_host', __( 'Host', $this->textdomain ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'ftp_connection_info', $args );
+
+		$this->add_settings_field( 'ftp_port', __( 'Port', $this->textdomain ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'ftp_connection_info', $args );
+
+		$this->add_settings_field( 'ftp_user', __( 'User', $this->textdomain ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'ftp_connection_info', $args );
+
+		$this->add_settings_field( 'ftp_password', __( 'Password', $this->textdomain ), array(
+			$this,
+			'admin_setting_field_input'
+		), 'ftp_connection_info', $args );
+
+		$args = array(
+			'post_type'      => 'acf-field-group',
+			'posts_per_page' => - 1,
+			'post_status'    => 'publish'
+		);
+
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			$options = array();
+
+			foreach ( $query->posts as $obj ) {
+				$options[ $obj->ID ] = $obj->post_title;
+			}
+
+			$args = array(
+				'description' => __( 'Each image name is on a different line.', $this->textdomain ),
+				'options'     => $options
+			);
+
+			$this->add_settings_field( 'acf_field_group', __( 'ACF Field Group', $this->textdomain ), array(
+				$this,
+				'admin_setting_field_select'
+			), 'default', $args );
+		}
+	}
+
+	public function render_acf_field_value( $field ) {
+		if ( $this->is_valid_acf_field( $field ) ) {
+			$parent       = get_post( $field['uploaded_to'] );
+			$field_object = $field['field_object'];
+
+			$icon = $field['icon'];
+			?>
+			<div class="acf-file-uploader has-value completed" data-library="all" data-mime_types="" data-uploader="wp">
+				<input name="<?php echo $field_object->post_name; ?>" value="<?php echo $field['ID']; ?>" data-name="id"
+				       type="hidden">
+
+				<div class="show-if-value file-wrap">
+					<div class="file-icon">
+						<img data-name="icon" src="<?php echo $icon; ?>" alt="">
+					</div>
+					<div class="file-info">
+						<p>
+							<strong data-name="title"><?php echo $field['title']; ?></strong>
+						</p>
+
+						<p>
+							<strong><?php _e( 'File name:', $this->textdomain ); ?></strong>
+							<a data-name="filename" href="" target="_blank"><?php echo $field['filename']; ?></a>
+						</p>
+
+						<p>
+							<strong><?php _e( 'File size:', $this->textdomain ); ?></strong>
+							<span data-name="filesize"><?php echo size_format( $field['filesize'] ); ?></span>
+						</p>
+					</div>
+					<div class="acf-actions -hover">
+						<a class="acf-icon -pencil dark" data-name="edit" href="#" title="Edit"></a><a
+							class="acf-icon -cancel dark" data-name="remove" href="#" title="Remove"></a>
+					</div>
+				</div>
+				<div class="hide-if-value">
+					<p><?php _e( 'No file selected', $this->textdomain ); ?> <a data-name="add"
+					                                                            class="acf-button button"
+					                                                            href="#"><?php _e( 'Add File', $this->textdomain ); ?></a>
+					</p>
+				</div>
+			</div>
+			<?php
+			$tmp = maybe_unserialize( $field_object->post_content );
+
+			$tmp['file_id'] = $field['ID'];
+
+			$tmp = wp_parse_args( $field, $tmp );
+
+			$tmp['name'] = $field_object->post_name;
+
+			$this->add_input_file( $tmp );
+		}
+	}
+
+	public function is_valid_acf_field( $field ) {
+		$field = acf_get_valid_field( $field );
+
+		if ( ! $this->is_positive_number( $field['ID'] ) ) {
+			return false;
+		}
+
+		return ( $this->array_has_value( $field ) && isset( $field['_valid'] ) && 1 == $field['_valid'] );
+	}
+
+	public function acf_field_by_id( $id, $post_id = null ) {
+		if ( function_exists( 'acf_render_field' ) ) {
+			$obj = get_post( $id );
+
+			if ( $obj instanceof WP_Post && 'acf-field' == $obj->post_type ) {
+				$data = _acf_get_field_by_id( $obj->ID );
+
+				$has_value = false;
+
+				if ( $this->is_positive_number( $post_id ) ) {
+					$tmp = get_field( $obj->post_excerpt, $post_id );
+					$tmp = acf_get_valid_field( $tmp );
+
+					if ( $this->is_valid_acf_field( $tmp ) ) {
+						$has_value = true;
+
+						$tmp['field_object'] = $obj;
+						$this->render_acf_field_value( $tmp );
 					}
 				}
 
-				if ( empty( $result ) ) {
-					$result = $first;
+				if ( ! $has_value ) {
+					acf_render_field( $data );
 				}
 			}
 		}
-
-		if ( empty( $result ) ) {
-			$default = $this->get_option( 'default' );
-
-			if ( ! empty( $default ) ) {
-				$default = $this->sanitize_media_value( $default );
-
-				if ( isset( $default['url'] ) && ! empty( $default['url'] ) ) {
-					$result = $default['url'];
-				}
-			}
-		}
-
-		return $result;
 	}
 
-	public function post_thumbnail_html_filter( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
-		if ( empty( $html ) ) {
-			$obj = get_post( $post_id );
+	public function shortcode( $atts = array(), $content = null ) {
+		$html = '';
 
-			if ( $obj instanceof WP_Post ) {
-				$thumbnail = get_post_meta( $post_id, 'thumbnail_url', true );
+		if ( function_exists( 'get_field' ) ) {
+			$atts = shortcode_atts( array(
+				'field_group'  => '',
+				'field_id'     => '',
+				'ftp_host'     => '',
+				'ftp_port'     => 21,
+				'ftp_user'     => '',
+				'ftp_password' => '',
+				'button_text'  => __( 'Upload', $this->textdomain ),
+				'post_id'      => ''
+			), $atts );
 
-				if ( empty( $thumbnail ) ) {
-					$thumbnail = $this->get_thumbnail_from_string( $obj->post_content );
-				}
+			$field_group = $atts['field_group'];
 
-				if ( ! empty( $thumbnail ) ) {
-					$html = sprintf( '<img src="%s" alt="%s">', $thumbnail, $obj->post_title );
+			if ( empty( $field_group ) ) {
+				$field_group = $this->get_option( 'acf_field_group' );
+			}
+
+			$field_id = $atts['field_id'];
+
+			$ftp_host     = $atts['ftp_host'];
+			$ftp_port     = $atts['ftp_port'];
+			$ftp_user     = $atts['ftp_user'];
+			$ftp_password = $atts['ftp_user'];
+			$button_text  = $atts['button_text'];
+
+			$post_id = $atts['post_id'];
+
+			if ( ! $this->is_positive_number( $post_id ) ) {
+				if ( is_single() || is_singular() || is_page() ) {
+					$post_id = get_the_ID();
 				}
 			}
+
+			if ( empty( $button_text ) ) {
+				$button_text = __( 'Upload', $this->textdomain );
+			}
+
+			ob_start();
+			?>
+			<div class="ftp-upload-acf">
+				<button class="upload-popup"><?php echo $button_text; ?></button>
+				<div id="uploadPopup">
+					<div class="inner">
+						<div class="module-header">
+							<h3><?php _e( 'FTP Upload', $this->textdomain ); ?></h3>
+						</div>
+						<div class="module-body">
+							<form method="post" enctype="multipart/form-data">
+								<fieldset>
+									<legend><?php _e( 'Connection Information', $this->textdomain ); ?></legend>
+									<label for="ftphost"><?php _e( 'Host:', $this->textdomain ); ?></label>
+									<input id="ftphost" type="text" name="ftphost" value="<?php echo $ftp_host; ?>">
+									<label for="ftpport"><?php _e( 'Port:', $this->textdomain ); ?></label>
+									<input id="ftpport" type="text" name="ftpport" value="<?php echo $ftp_port; ?>">
+									<label for="ftpuser"><?php _e( 'User:', $this->textdomain ); ?></label>
+									<input id="ftpuser" type="text" name="ftpuser" value="<?php echo $ftp_user; ?>">
+									<label for="ftppassword"><?php _e( 'Password:', $this->textdomain ); ?></label>
+									<input id="ftppassword" type="password" name="ftppassword"
+									       value="<?php echo $ftp_password; ?>">
+								</fieldset>
+								<?php
+								if ( $this->is_positive_number( $field_id ) ) {
+									$this->acf_field_by_id( $field_id, $post_id );
+								} elseif ( $this->is_positive_number( $field_group ) ) {
+									$args = array(
+										'posts_per_page' => - 1,
+										'post_type'      => 'acf-field',
+										'post_status'    => 'publish',
+										'post_parent'    => $field_group,
+										'fields'         => 'ids'
+									);
+
+									$query = new WP_Query( $args );
+
+									if ( $query->have_posts() ) {
+										foreach ( $query->posts as $id ) {
+											$this->acf_field_by_id( $id, $post_id );
+										}
+									}
+								}
+								?>
+							</form>
+						</div>
+						<div class="module-footer">
+							<button class="upload"><?php _e( 'Upload', $this->textdomain ); ?></button>
+							<button class="test"><?php _e( 'Test', $this->textdomain ); ?></button>
+							<button class="cancel"><?php _e( 'Cancel', $this->textdomain ); ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+
+			$html = ob_get_clean();
 		}
 
 		return $html;
 	}
-
-	public function custom_admin_init_action() {
-		$args = array(
-			'description' => __( 'Each image name is on a different line.', $this->textdomain )
-		);
-
-		$this->add_settings_field( 'exclude', __( 'Exclude Image Name', $this->textdomain ), array(
-			$this,
-			'admin_setting_field_textarea'
-		), 'default', $args );
-
-		$this->add_settings_field( 'default', __( 'Default Thumbnail', $this->textdomain ), array(
-			$this,
-			'admin_setting_field_media_upload'
-		) );
-	}
 }
 
-function Auto_Thumbnail() {
-	return Auto_Thumbnail::get_instance();
+function FTP_Upload_ACF() {
+	return FTP_Upload_ACF::get_instance();
 }
 
 add_action( 'plugins_loaded', function () {
-	Auto_Thumbnail();
+	FTP_Upload_ACF();
 } );
