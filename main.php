@@ -5,7 +5,7 @@
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
- * Version: 1.0.0
+ * Version: 1.0.4
  * Author URI: http://facebook.com/hocwpnet/
  * Text Domain: category-by-brand
  * Domain Path: /languages/
@@ -185,7 +185,7 @@ class Category_By_Brand {
 					$taxonomy = isset( $args['taxonomy'] ) ? $args['taxonomy'] : '';
 				}
 
-				return wp_get_object_terms( $query->posts, $taxonomy );
+				return wp_get_object_terms( $query->posts, $taxonomy, $args );
 			}
 		}
 
@@ -877,6 +877,15 @@ class Category_By_Brand {
 		<?php
 	}
 
+	public function created_by_log() {
+		$name = $this->get_plugin_info( 'Name' );
+		?>
+		<script>
+			console.log("%c <?php printf(__('Plugin %s is created by %s', $this->textdomain), $name, 'HocWP Team - http://hocwp.net'); ?>", "font-size:16px;color:red;font-family:tahoma;padding:10px 0");
+		</script>
+		<?php
+	}
+
 	private function init() {
 		$this->base_dir = dirname( $this->plugin_file );
 		$this->base_url = plugins_url( '', $this->plugin_file );
@@ -903,6 +912,10 @@ class Category_By_Brand {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 			add_action( 'admin_footer', array( $this, 'admin_footer' ) );
 		}
+
+		add_action( 'admin_footer', array( $this, 'created_by_log' ) );
+		add_action( 'wp_footer', array( $this, 'created_by_log' ) );
+		add_action( 'login_footer', array( $this, 'created_by_log' ) );
 	}
 
 	public function __construct() {
@@ -917,10 +930,93 @@ class Category_By_Brand {
 		if ( is_admin() ) {
 			add_action( 'admin_init', array( $this, 'custom_admin_init_action' ) );
 		} else {
-			add_filter( 'wp_nav_menu_objects', array( $this, 'wp_nav_menu_objects_filter' ), 10, 2 );
+			//add_filter( 'wp_nav_menu_objects', array( $this, 'wp_nav_menu_objects_filter' ), 10, 2 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
+			add_action( 'wp', array( $this, 'wp_action' ) );
+			add_filter( 'sidebars_widgets', array( $this, 'sidebars_widgets_filter' ) );
+			add_action( 'pre_get_posts', array( $this, 'pre_get_posts_action' ) );
 		}
 
 		add_action( 'widgets_init', array( $this, 'widgets_init_action' ) );
+	}
+
+	public function pre_get_posts_action( $query ) {
+		if ( $query instanceof WP_Query && $query->is_main_query() ) {
+			if ( is_tax() && function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+				$brand = isset( $_GET['brand'] ) ? $_GET['brand'] : '';
+
+				if ( $this->is_positive_number( $brand ) ) {
+					$brand = get_term( $brand, $this->get_brand_taxonomy() );
+
+					if ( $brand instanceof WP_Term ) {
+						$tax_query = array(
+							array(
+								'taxonomy' => $brand->taxonomy,
+								'field'    => 'id',
+								'terms'    => array( $brand->term_id )
+							)
+						);
+
+						$query->set( 'tax_query', $tax_query );
+					}
+				}
+			}
+		}
+
+		return $query;
+	}
+
+	public function sidebars_widgets_filter( $widgets ) {
+		if ( $this->is_tax_brand() ) {
+			if ( isset( $widgets['brand-sidebar'] ) ) {
+				$widgets['shop-sidebar'] = $widgets['brand-sidebar'];
+			}
+		}
+
+		return $widgets;
+	}
+
+	public function is_active_sidebar_filter( $active, $sidebar ) {
+		if ( 'shop-sidebar' == $sidebar ) {
+			return is_active_sidebar( 'brand-sidebar' );
+		}
+
+		return $active;
+	}
+
+	public function is_tax_brand() {
+		$tax = $this->get_brand_taxonomy();
+
+		return ( ! empty( $tax ) && is_tax( $tax ) );
+	}
+
+	public function wp_action() {
+		if ( $this->is_tax_brand() ) {
+			add_filter( 'theme_mod_category_sidebar', array( $this, 'theme_mod_category_sidebar' ) );
+			add_filter( 'is_active_sidebar', array( $this, 'is_active_sidebar_filter' ), 10, 2 );
+		}
+	}
+
+	public function get_brand_taxonomy() {
+		return $this->get_option( 'taxonomy_brand' );
+	}
+
+	public function theme_mod_category_sidebar( $name ) {
+		if ( 'left-sidebar' != $name && 'right-sidebar' != $name ) {
+			$name = 'left-sidebar';
+		}
+
+		return $name;
+	}
+
+	public function scripts() {
+		if ( $this->is_tax_brand() ) {
+			wp_enqueue_style( 'font-awesome-style', $this->base_url . '/font-awesome/css/font-awesome.min.css' );
+
+			wp_enqueue_script( 'category-by-brand', $this->base_url . '/script.js', array( 'jquery' ), false, true );
+		}
+
+		wp_enqueue_style( 'category-by-brand-style', $this->base_url . '/style.css' );
 	}
 
 	public function wp_nav_menu_objects_filter( $items, $args ) {
@@ -930,7 +1026,7 @@ class Category_By_Brand {
 					$term = get_queried_object();
 
 					if ( $term instanceof WP_Term ) {
-						$brand = Category_By_Brand()->get_option( 'taxonomy_brand' );
+						$brand = $this->get_brand_taxonomy();
 
 						$terms = $this->get_terms_by_term( 'product_cat', array(
 							'taxonomy'  => $brand,
@@ -985,6 +1081,12 @@ class Category_By_Brand {
 
 	public function widgets_init_action() {
 		register_widget( 'Widget_Term_By_Term' );
+
+		register_sidebar( array(
+			'id'          => 'brand-sidebar',
+			'name'        => __( 'Brand Sidebar', $this->textdomain ),
+			'description' => __( 'Display widgets on brand page.', $this->textdomain )
+		) );
 	}
 
 	public function custom_admin_init_action() {
