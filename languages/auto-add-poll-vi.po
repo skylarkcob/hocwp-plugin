@@ -1,0 +1,1202 @@
+# Copyright (C) 2016 Automattic
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SB Core\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
+"POT-Creation-Date: 2018-11-21 20:32+0700\n"
+"PO-Revision-Date: 2018-11-21 20:33+0700\n"
+"Last-Translator: \n"
+"Language-Team: HocWP Team - hocwp.net@gmail.com - www.hocwp.net\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: core.php:575
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: core.php:833
+msgid "Remove"
+msgstr "Xóa"
+
+#: core.php:834
+msgid "Add"
+msgstr "Thêm"
+
+#: core.php:918
+#, php-format
+msgid "Plugin %s is created by %s"
+msgstr "Plugin %s được tạo bởi %s"
+
+#: main.php:60 main.php:180
+msgid "Poll Options"
+msgstr "Các bình chọn"
+
+#: main.php:113
+msgid "There is no poll option."
+msgstr "Không có tùy chọn nào."
+
+#: main.php:181
+msgid "Poll Option"
+msgstr "Bình chọn"
+
+#: main.php:217
+msgid "Poll box title."
+msgstr "Tiêu đề box bình chọn."
+
+#: main.php:219
+msgid "Poll Title"
+msgstr "Tiêu đề bình chọn"
+
+#: main.php:224
+msgid "Submit Button Text"
+msgstr "Nút xem kết quả"
+
+#: main.php:232
+msgid "Number"
+msgstr "Số lượng"
+
+#: main.php:238
+msgid "Result Bottom"
+msgstr "Phần dưới kết quả"
+
+#: main.php:246
+msgctxt "poll"
+msgid "Option A"
+msgstr "Phương án A"
+
+#: main.php:247
+msgctxt "poll"
+msgid "Option B"
+msgstr "Phương án B"
+
+#: main.php:248
+msgctxt "poll"
+msgid "Option C"
+msgstr "Phương án C"
+
+#: main.php:249
+msgctxt "poll"
+msgid "Option D"
+msgstr "Phương án D"
+
+#: main.php:301
+msgid "View result"
+msgstr "Xem kết quả"
+
+#: main.php:311
+msgid "Choose the best option"
+msgstr "Hãy chọn phương án đúng nhất"
+
+#: main.php:419
+#, php-format
+msgid ""
+"has <span data-key=\"%s\" data-count=\"%s\" class=\"count\">%s</span> person "
+"choose."
+msgstr ""
+"có <span data-key=\"%s\" data-count=\"%s\" class=\"count\">%s</span> người "
+"chọn."
+
+#: main.php:426
+msgid "Result"
+msgstr "Kết quả"
+
+#: main.php:427
+msgid "Please choose option for viewing result"
+msgstr "Chọn 1 phương án để xem kết quả"
+
+#~ msgid "Create custom post type using for poll options."
+#~ msgstr "Tạo custom post type để sử dụng cho các bình chọn."
+
+#~ msgid "Post Type"
+#~ msgstr "Loại bài viết"
+
+#~ msgid "Each poll option in new line."
+#~ msgstr "Mỗi bình chọn nằm trên một dòng."
+
+#~ msgid "Number of poll options to show on each post."
+#~ msgstr "Số lượng bình chọn hiển thị trên mỗi bài viết."
+
+#~ msgid "Login"
+#~ msgstr "Đăng nhập"
+
+#~ msgid "No posts found."
+#~ msgstr "Không có bài viết nào được tìm thấy."
+
+#~ msgid "Sign up with your Google account"
+#~ msgstr "Đăng ký bằng tài khoản Google"
+
+#~ msgid "Continue with Google"
+#~ msgstr "Tiếp tục với Google"
+
+#~ msgid "Sign up with your Facebook account"
+#~ msgstr "Đăng ký với tài khoản Facebook"
+
+#~ msgid "Continue with Facebook"
+#~ msgstr "Tiếp tục với Facebook"
+
+#~ msgctxt "connected socials"
+#~ msgid "Or"
+#~ msgstr "Hoặc"
+
+#~ msgid "<strong>Error:</strong> Please correct the captcha."
+#~ msgstr "<strong>Lỗi:</strong> Xin vui lòng điền đúng mã bảo mật."
+
+#~ msgid "Login footer"
+#~ msgstr "Chân trang đăng nhập"
+
+#~ msgid "Account"
+#~ msgstr "Tài khoản"
+
+#~ msgid "Allow users can login and register via their social accounts."
+#~ msgstr ""
+#~ "Cho phép người dùng có thể đăng nhập và đăng ký thông qua tài khoản mạng "
+#~ "xã hội."
+
+#~ msgid "Connect Social"
+#~ msgstr "Kết nối mạng xã hội"
+
+#~ msgid "Using captcha for account form?"
+#~ msgstr "Sử dụng mã bảo mật cho các form tài khoản?"
+
+#~ msgid "Captcha"
+#~ msgstr "Mã bảo mật"
+
+#~ msgid "Change style of default WordPress login page for displaying nicely?"
+#~ msgstr ""
+#~ "Thay đổi giao diện trang đăng nhập mặc định của WordPress để hiển thị đẹp "
+#~ "hơn?"
+
+#~ msgid "Custom Style"
+#~ msgstr "Tùy chỉnh giao diện"
+
+#~ msgid "Login Page"
+#~ msgstr "Trang đăng nhập"
+
+#~ msgid "Register Page"
+#~ msgstr "Trang đăng ký"
+
+#~ msgid "Lost Password Page"
+#~ msgstr "Trang quên mật khẩu"
+
+#~ msgid "Profile Page"
+#~ msgstr "Trang thông tin cá nhân"
+
+#~ msgid "Saved Posts Page"
+#~ msgstr "Trang bài viết đã lưu"
+
+#~ msgid "Login Logo"
+#~ msgstr "Logo trang đăng nhập"
+
+#~ msgid "Account Tools Page"
+#~ msgstr "Trang công cụ tài khoản"
+
+#~ msgid "Customize Default Login Page"
+#~ msgstr "Tùy chỉnh trang đăng nhập mặc định"
+
+#~ msgid "This site does not allow users to register."
+#~ msgstr "Trang này không cho phép người dùng đăng ký."
+
+#~ msgid ""
+#~ "You must fully input settings in <a href=\"%s\">Social tab</a> for "
+#~ "account extension works normally."
+#~ msgstr ""
+#~ "Bạn phải cài đặt đầy đủ nội dung trong <a href=\"%s\">tab Social</a> để "
+#~ "gói mở rộng cho tài khoản hoạt động bình thường."
+
+#~ msgid "Account Extension:"
+#~ msgstr "Gói mở rộng tài khoản:"
+
+#~ msgid "Connected Accounts"
+#~ msgstr "Kết nối tài khoản"
+
+#~ msgid ""
+#~ "If you would like to use a 3rd party account such as Facebook or Google "
+#~ "to Sign In to this site, you can add it below. You can disconnect these "
+#~ "accounts at any time."
+#~ msgstr ""
+#~ "Nếu bạn muốn sử dụng tài khoản của bên thứ 3 như Facebook hoặc Google để "
+#~ "đăng nhập vào trang web, bạn có thể thêm chúng vào bên dưới. Bạn có thể "
+#~ "ngắt kết nối những tài khoản này mọi lúc."
+
+#~ msgctxt "connect social account"
+#~ msgid "Facebook"
+#~ msgstr "Facebook"
+
+#~ msgctxt "connect social account"
+#~ msgid "Connect"
+#~ msgstr "Kết nối"
+
+#~ msgctxt "connect social account"
+#~ msgid "Disconnect"
+#~ msgstr "Ngắt kết nối"
+
+#~ msgid "Fetching data..."
+#~ msgstr "Đang lấy dữ liệu..."
+
+#~ msgctxt "connect social account"
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "Chính sách bảo mật"
+
+#~ msgid "Select the language:"
+#~ msgstr "Chọn ngôn ngữ:"
+
+#~ msgid "Please login to use this function."
+#~ msgstr "Xin vui lòng đăng nhập để sử dụng tính năng này."
+
+#~ msgid "Invalid email address."
+#~ msgstr "Địa chỉ email không đúng."
+
+#~ msgid "Invalid password or passwords do not match."
+#~ msgstr "Mật khẩu sai hoặc mật khẩu không khớp."
+
+#~ msgid "Your current password does not match with our records."
+#~ msgstr ""
+#~ "Mật khẩu hiện tại của bạn không khớp với những gì chúng tôi ghi nhận."
+
+#~ msgid "Your profile has been updated successfully."
+#~ msgstr "Thông tin cá nhân của bạn đã được cập nhật thành công."
+
+#~ msgid "There was an error occurred, please try again."
+#~ msgstr "Đã có lỗi xảy ra, xin vui lòng thử lại."
+
+#~ msgid "Roles:"
+#~ msgstr "Nhóm:"
+
+#~ msgid "Joined:"
+#~ msgstr "Tham gia:"
+
+#~ msgid "Nickname:"
+#~ msgstr "Biệt danh:"
+
+#~ msgctxt "profile"
+#~ msgid "General information"
+#~ msgstr "Thông tin chung"
+
+#~ msgctxt "profile"
+#~ msgid "Security setting"
+#~ msgstr "Cài đặt bảo mật"
+
+#~ msgctxt "profile"
+#~ msgid "Contact information"
+#~ msgstr "Thông tin liên hệ"
+
+#~ msgid "Username"
+#~ msgstr "Tên tài khoản"
+
+#~ msgid "First Name"
+#~ msgstr "Tên"
+
+#~ msgid "Last Name"
+#~ msgstr "Họ"
+
+#~ msgid "Display Name"
+#~ msgstr "Tên hiển thị"
+
+#~ msgid "Nickname"
+#~ msgstr "Biệt danh"
+
+#~ msgid "Email"
+#~ msgstr "Địa chỉ email"
+
+#~ msgid "Bio"
+#~ msgstr "Tự bạch"
+
+#~ msgid "Current Password"
+#~ msgstr "Mật khẩu hiện tại"
+
+#~ msgid "New Password"
+#~ msgstr "Mật khẩu mới"
+
+#~ msgid "Confirm Password"
+#~ msgstr "Xác nhận mật khẩu"
+
+#~ msgid "Save Changes"
+#~ msgstr "Lưu thay đổi"
+
+#~ msgid "You are logged in."
+#~ msgstr "Bạn đã đăng nhập."
+
+#~ msgid "Username or Email"
+#~ msgstr "Tên tài khoản hoặc địa chỉ email"
+
+#~ msgid "Password"
+#~ msgstr "Mật khẩu"
+
+#~ msgid "Remember Me"
+#~ msgstr "Ghi nhớ đăng nhập"
+
+#~ msgid "Log In"
+#~ msgstr "Đăng nhập"
+
+#~ msgid "Lost Password?"
+#~ msgstr "Quên mật khẩu?"
+
+#~ msgid "Or"
+#~ msgstr "Hoặc"
+
+#~ msgid "Register"
+#~ msgstr "Đăng ký"
+
+#~ msgid "<strong>ERROR</strong>: Enter a username or email address."
+#~ msgstr "<strong>Lỗi:</strong> Điền tên tài khoản hoặc địa chỉ email."
+
+#~ msgid ""
+#~ "<strong>ERROR</strong>: There is no user registered with that email "
+#~ "address."
+#~ msgstr ""
+#~ "<strong>Lỗi:</strong> Không có người dùng nào đăng ký bằng địa chỉ email "
+#~ "đó."
+
+#~ msgid "<strong>ERROR</strong>: Invalid username or email."
+#~ msgstr "<strong>Lỗi:</strong> Tên tài khoản hoặc địa chỉ email không đúng."
+
+#~ msgid "Someone has requested a password reset for the following account:"
+#~ msgstr "Ai đó đã yêu cầu khôi phục mật khẩu cho tài khoản bên dưới:"
+
+#~ msgid "Site Name: %s"
+#~ msgstr "Tên trang web: %s"
+
+#~ msgid "Username: %s"
+#~ msgstr "Tên tài khoản: %s"
+
+#~ msgid ""
+#~ "If this was a mistake, just ignore this email and nothing will happen."
+#~ msgstr ""
+#~ "Nếu đây là lỗi của chúng tôi, bạn chỉ việc bỏ qua nội dung thư này và "
+#~ "không làm gì cả."
+
+#~ msgid "To reset your password, visit the following address:"
+#~ msgstr "Để khôi phục mật khẩu của bạn, xin vui lòng truy cập đường dẫn sau:"
+
+#~ msgid "[%s] Password Reset"
+#~ msgstr "[%s] Khôi phục mật khẩu"
+
+#~ msgid "The email could not be sent."
+#~ msgstr "Thư không thể gửi đi."
+
+#~ msgid "Possible reason: your host may have disabled the mail() function."
+#~ msgstr "Lý do có thể: Hosting của bạn đã có thể tắt hàm gửi mail."
+
+#~ msgid "Please check your email to reset new password."
+#~ msgstr ""
+#~ "Xin vui lòng kiểm tra địa chỉ email của bạn để khôi phục mật khẩu mới."
+
+#~ msgid ""
+#~ "Please enter your email address or username. You will receive a link to "
+#~ "create a new password via email."
+#~ msgstr ""
+#~ "Xin vui lòng nhập địa chỉ email hoặc tên đăng nhập. Bạn sẽ nhận một đường "
+#~ "link để chuyển sang trang tạo mật khẩu mới vào hòm thư."
+
+#~ msgid "Email Address or Username"
+#~ msgstr "Địa chỉ email hoặc tên tài khoản"
+
+#~ msgid "Reset Password"
+#~ msgstr "Khôi phục mật khẩu"
+
+#~ msgid "Sign up"
+#~ msgstr "Đăng ký"
+
+#~ msgid "Please enter your information."
+#~ msgstr "Xin vui lòng điền thông tin của bạn."
+
+#~ msgid "Invalid email."
+#~ msgstr "Địa chỉ email không đúng."
+
+#~ msgid "Passwords do not match!"
+#~ msgstr "Mật khẩu không trùng khớp!"
+
+#~ msgid "Username or email exists!"
+#~ msgstr "Tên tài khoản hoặc địa chỉ email đã tồn tại!"
+
+#~ msgid "Your account has been created successfully."
+#~ msgstr "Tài khoản của bạn đã được tạo thành công."
+
+#~ msgid ""
+#~ "By creating an account, you agree to <a href=\"%s\">terms and privacy "
+#~ "policy</a>."
+#~ msgstr ""
+#~ "Bằng cách tạo tài khoản, bạn đồng ý với <a href=\"%s\">điều khoản và "
+#~ "chính sách bảo mật</a>."
+
+#~ msgid "Already have an account? <a href=\"%s\">Sign in</a>"
+#~ msgstr "Đã có tài khoản? <a href=\"%s\">Đăng nhập</a>"
+
+#~ msgid "Add Post Frontend"
+#~ msgstr "Viết bài trên frontend"
+
+#~ msgid "Allow guest add new post without login."
+#~ msgstr "Cho phép khách đăng bài viết không cần đăng nhập."
+
+#~ msgid "Guest Posting"
+#~ msgstr "Khách đăng bài"
+
+#~ msgid "Post type for the user to choose when posting."
+#~ msgstr "Thể loại bài viết cho người dùng lựa chọn khi đăng tin."
+
+#~ msgid "Add Post Page"
+#~ msgstr "Trang đăng bài"
+
+#~ msgid "Disabled Taxonomies"
+#~ msgstr "Tắt taxonomy"
+
+#~ msgid "Exclude these taxonomy types when posting."
+#~ msgstr "Loại trừ những taxonomy này khi đăng bài."
+
+#~ msgid "Combined Taxonomies"
+#~ msgstr "Gộp taxonomy"
+
+#~ msgid "Users can only select one of these taxonomy types when posting."
+#~ msgstr ""
+#~ "Người dùng có thể chọn một trong số những taxonomy này khi đăng bài."
+
+#~ msgid "Required Taxonomies"
+#~ msgstr "Taxonomy bắt buộc"
+
+#~ msgid ""
+#~ "Users must choose at least one term in these taxonomies when posting."
+#~ msgstr ""
+#~ "Người dùng phải chọn ít nhất một đối tượng trong danh sách những taxonomy "
+#~ "này khi đăng bài."
+
+#~ msgid "Redirect Seconds"
+#~ msgstr "Số giây chuyển tiếp"
+
+#~ msgid ""
+#~ "The system will redirect the user to another address after the post has "
+#~ "been posted."
+#~ msgstr ""
+#~ "Hệ thống sẽ chuyển tiếp người dùng sang địa chỉ khác sau khi bài viết đã "
+#~ "được đăng."
+
+#~ msgid "Redirect URL"
+#~ msgstr "Đường dẫn chuyển tiếp"
+
+#~ msgid ""
+#~ "The system will redirect the user to this URL after the post has been "
+#~ "posted."
+#~ msgstr ""
+#~ "Hệ thống sẽ chuyển tiếp người dùng sang đường dẫn này sau khi bài viết đã "
+#~ "được đăng."
+
+#~ msgid "Upload image"
+#~ msgstr "Tải ảnh lên"
+
+#~ msgid "-- Choose %s --"
+#~ msgstr "-- Chọn %s --"
+
+#~ msgid "You can only upload %s media file per day."
+#~ msgstr "Bạn có thể tải lên %s tập tin đa phương tiện mỗi ngày."
+
+#~ msgid "Invalid form data."
+#~ msgstr "Dữ liệu của form không đúng."
+
+#~ msgid ""
+#~ "Your post has been added successfully. You can <a href=\"%s\">click here</"
+#~ "a> to update it."
+#~ msgstr ""
+#~ "Bài viết của bạn đã được thêm thành công. Bạn có thể <a href=\"%s\">nhấn "
+#~ "vào đây</a> để cập nhật nó."
+
+#~ msgid ""
+#~ "Your post has been added successfully. We will check and approve your "
+#~ "post soon."
+#~ msgstr ""
+#~ "Bài viết của bạn đã được đăng thành công. Chúng tôi sẽ kiểm tra và duyệt "
+#~ "bài của bạn sớm nhất có thể."
+
+#~ msgid ""
+#~ "An error has occurred, please try again or contact the administrator."
+#~ msgstr ""
+#~ "Đã có lỗi xảy ra, xin vui lòng thử lại hoặc liên hệ với người quản trị."
+
+#~ msgid "Post title and post content must not be empty."
+#~ msgstr "Tiêu đề bài viết và nội dung bài viết phải không được để trống."
+
+#~ msgid "Post type:"
+#~ msgstr "Loại bài viết:"
+
+#~ msgid "Post title (%s):"
+#~ msgstr "Tiêu đề bài viết (%s):"
+
+#~ msgid "Thumbnail:"
+#~ msgstr "Ảnh đại diện:"
+
+#~ msgid "Add Post"
+#~ msgstr "Đăng bài viết"
+
+#~ msgid "Back to home"
+#~ msgstr "Trở lại trang chủ"
+
+#~ msgid "Coin"
+#~ msgstr "Coin"
+
+#~ msgid "Leaderboard"
+#~ msgstr "Đầu trang"
+
+#~ msgid "Ads Management"
+#~ msgstr "Quảng cáo"
+
+#~ msgid "Ads Information"
+#~ msgstr "Thông tin quảng cáo"
+
+#~ msgid "-- Choose position --"
+#~ msgstr "-- Chọn vị trí --"
+
+#~ msgid "Position:"
+#~ msgstr "Vị trí:"
+
+#~ msgid "Expiry date:"
+#~ msgstr "Ngày hết hạn:"
+
+#~ msgid "Image:"
+#~ msgstr "Hình ảnh:"
+
+#~ msgid "Url:"
+#~ msgstr "Đường dẫn:"
+
+#~ msgid "Code:"
+#~ msgstr "Mã:"
+
+#~ msgid "Make this ads as active status?"
+#~ msgstr "Thiết lập kích hoạt cho quảng cáo này?"
+
+#~ msgid "Active"
+#~ msgstr "Kích hoạt"
+
+#~ msgid "Expiry date"
+#~ msgstr "Ngày hết hạn"
+
+#~ msgid "Anime"
+#~ msgstr "Phim"
+
+#~ msgid "-- Choose post type --"
+#~ msgstr "-- Chọn loại bài viết --"
+
+#~ msgid "Animation Post Type"
+#~ msgstr "Loại bài viết cho phim"
+
+#~ msgid "Post type for using as animation."
+#~ msgstr "Thể loại bài viết dùng cho phim."
+
+#~ msgid "Prefix:"
+#~ msgstr "Tiền tố:"
+
+#~ msgid "Suffix:"
+#~ msgstr "Hậu tố:"
+
+#~ msgid "Edit %s"
+#~ msgstr "Chỉnh sửa %s"
+
+#~ msgid "Edit Anime"
+#~ msgstr "Chỉnh sửa phim"
+
+#~ msgid "Post parent"
+#~ msgstr "Bài viết cha"
+
+#~ msgid "View"
+#~ msgstr "Xem"
+
+#~ msgid "View video"
+#~ msgstr "Xem video"
+
+#~ msgid "View &#8220;%s&#8221;"
+#~ msgstr "Xem &#8220;%s&#8221;"
+
+#~ msgid "Add New Episode"
+#~ msgstr "Thêm tập phim mới"
+
+#~ msgctxt "episode prefix"
+#~ msgid "Ep. %s"
+#~ msgstr "Ep. %s"
+
+#~ msgid "Please set parent for this <strong>%s</strong>."
+#~ msgstr "Thiết lập cha cho <strong>%s</strong> này."
+
+#~ msgctxt "taxonomy"
+#~ msgid "Release Years"
+#~ msgstr "Năm phát hành"
+
+#~ msgctxt "taxonomy"
+#~ msgid "Release Year"
+#~ msgstr "Năm phát hành"
+
+#~ msgctxt "taxonomy"
+#~ msgid "Years"
+#~ msgstr "Năm phát hành"
+
+#~ msgctxt "taxonomy"
+#~ msgid "Status"
+#~ msgstr "Trạng thái"
+
+#~ msgctxt "post type"
+#~ msgid "Episodes"
+#~ msgstr "Tập phim"
+
+#~ msgctxt "post type"
+#~ msgid "Episode"
+#~ msgstr "Tập phim"
+
+#~ msgid ""
+#~ "If you like, you may enter custom structures for your custom taxonomy "
+#~ "term and custom post type URLs here. If you leave these blank the "
+#~ "defaults will be used. Note: This function may affect the performance of "
+#~ "the site."
+#~ msgstr ""
+#~ "Nếu muốn, bạn cũng có thể nhập cấu trúc đường dẫn tĩnh cho đường link của "
+#~ "post type và taxonomy tùy chỉnh. Nếu bạn để trống, thông tin mặc định sẽ "
+#~ "được sử dụng. Chú ý: Chức năng này có thể sẽ ảnh hướng đến hiệu suất "
+#~ "trang web của bạn."
+
+#~ msgid "Custom Base Slug"
+#~ msgstr "Base slug tùy chỉnh"
+
+#~ msgid ""
+#~ "We do not encourage you to do this but if you like you can still remove "
+#~ "the base slug from permalink."
+#~ msgstr ""
+#~ "Chúng tôi không khuyến khích bạn làm việc này, tuy nhiên nếu bạn muốn bạn "
+#~ "cũng có thể xóa base slug trong đường dẫn tĩnh."
+
+#~ msgid "Remove Base Slug"
+#~ msgstr "Xóa base slug"
+
+#~ msgid "%s base"
+#~ msgstr "%s base"
+
+#~ msgid "Base slug for custom post type %s"
+#~ msgstr "Base slug cho post type tùy chỉnh %s"
+
+#~ msgid "Remove base slug for post type %s"
+#~ msgstr "Xóa base slug cho post type %s"
+
+#~ msgid "Base slug for custom taxonomy %s"
+#~ msgstr "Base slug cho taxonomy tùy chỉnh %s"
+
+#~ msgid "Remove base slug for taxonomy %s"
+#~ msgstr "Xóa base slug cho taxonomy %s"
+
+#~ msgid "Classifieds"
+#~ msgstr "Rao vặt"
+
+#~ msgid "Use category as location."
+#~ msgstr "Sử dụng chuyên mục làm vị trí đăng tin."
+
+#~ msgid "Category as Location"
+#~ msgstr "Chuyên mục làm vị trí"
+
+#~ msgid "Maps:"
+#~ msgstr "Bản đồ:"
+
+#~ msgid "Custom Location:"
+#~ msgstr "Vị trí tùy chọn:"
+
+#~ msgctxt "post location"
+#~ msgid "Locations"
+#~ msgstr "Vị trí"
+
+#~ msgctxt "post location"
+#~ msgid "Location"
+#~ msgstr "Vị trí"
+
+#~ msgid "General Information"
+#~ msgstr "Thông tin chung"
+
+#~ msgid "Address:"
+#~ msgstr "Địa chỉ:"
+
+#~ msgid "Price:"
+#~ msgstr "Giá:"
+
+#~ msgid "Phone:"
+#~ msgstr "Điện thoại:"
+
+#~ msgid "Email:"
+#~ msgstr "Địa chỉ email:"
+
+#~ msgid "Acreage:"
+#~ msgstr "Diện tích:"
+
+#~ msgid ""
+#~ "<strong>Warning:</strong> Extension <code>%s</code> requires theme core "
+#~ "version as least %s."
+#~ msgstr ""
+#~ "<strong>Chú ý:</strong> Gói mở rộng <code>%s</code> yêu cầu phiên bản "
+#~ "nhân giao diện tối thiểu từ %s."
+
+#~ msgid "News"
+#~ msgstr "Tin tức"
+
+#~ msgid "Classifieds Types"
+#~ msgstr "Thể loại tin rao"
+
+#~ msgid "Classifieds Type"
+#~ msgstr "Thể loại tin rao"
+
+#~ msgid "Types"
+#~ msgstr "Thể loại"
+
+#~ msgid "Price"
+#~ msgstr "Giá"
+
+#~ msgid "Acreages"
+#~ msgstr "Diện tích"
+
+#~ msgid "Acreage"
+#~ msgstr "Diện tích"
+
+#~ msgid "Salaries"
+#~ msgstr "Mức lương"
+
+#~ msgid "Salary"
+#~ msgstr "Mức lương"
+
+#~ msgid "Currency Units"
+#~ msgstr "Đơn vị tiền tệ"
+
+#~ msgid "Currency Unit"
+#~ msgstr "Đơn vị tiền tệ"
+
+#~ msgid "Units"
+#~ msgstr "Đơn vị"
+
+#~ msgid "News Categories"
+#~ msgstr "Chuyên mục tin tức"
+
+#~ msgid "News Category"
+#~ msgstr "Chuyên mục tin tức"
+
+#~ msgid "Categories"
+#~ msgstr "Chuyên mục"
+
+#~ msgid "News Tags"
+#~ msgstr "Thẻ tin tức"
+
+#~ msgid "News Tag"
+#~ msgstr "Thẻ tin tức"
+
+#~ msgid "Tags"
+#~ msgstr "Thẻ"
+
+#~ msgid "Agreed price"
+#~ msgstr "Thỏa thuận"
+
+#~ msgid "Sidebar Manager"
+#~ msgstr "Quản lý sidebar"
+
+#~ msgid "Sidebars"
+#~ msgstr "Sidebar"
+
+#~ msgid "Sidebar"
+#~ msgstr "Sidebar"
+
+#~ msgid "%s Sidebar"
+#~ msgstr "%s sidebar"
+
+#~ msgid "Display widget on %s singular page and archive page."
+#~ msgstr "Hiển thị widget %s trên trang single và trang lưu trữ."
+
+#~ msgid "Code Prettify"
+#~ msgstr "Định dạng mã"
+
+#~ msgid "Theme"
+#~ msgstr "Giao diện"
+
+#~ msgid "Load script on singular page only?"
+#~ msgstr "Chỉ tải script trên trang xem bài viết?"
+
+#~ msgid "Only Singular"
+#~ msgstr "Chỉ trang xem bài viết"
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+#~ msgid "Only load Google Maps script on Single page."
+#~ msgstr "Chỉ tải mã Google Maps trên trang xem bài viết."
+
+#~ msgid "Only Single"
+#~ msgstr "Chỉ trang xem bài viết"
+
+#~ msgid "Default Latitude"
+#~ msgstr "Vĩ độ mặc định"
+
+#~ msgid "Default Longitude"
+#~ msgstr "Kinh độ mặc định"
+
+#~ msgid "JW Player"
+#~ msgstr "JW Player"
+
+#~ msgid "Streamango"
+#~ msgstr "Streamango"
+
+#~ msgid "Streamango streaming API settings."
+#~ msgstr "Cài đặt Streamango API."
+
+#~ msgid "Streamcherry"
+#~ msgstr "Streamcherry"
+
+#~ msgid "Streamcherry streaming API settings."
+#~ msgstr "Cài đặt Streamcherry API."
+
+#~ msgid "Key"
+#~ msgstr "Mã"
+
+#~ msgid "-- Choose skin --"
+#~ msgstr "-- Chọn giao diện --"
+
+#~ msgid "Skin"
+#~ msgstr "Giao diện"
+
+#~ msgid "Link not valid"
+#~ msgstr "Đường dẫn không đúng"
+
+#~ msgid "Cannot get download ticket!"
+#~ msgstr "Không thể lấy download ticket!"
+
+#~ msgid "JW Player extension not loaded!"
+#~ msgstr "Gói mở rộng JW Player không được tải!"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Ảnh đại diện"
+
+#~ msgid "Featured Image"
+#~ msgstr "Ảnh đại diện"
+
+#~ msgid "Media Player"
+#~ msgstr "Trình phát video"
+
+#~ msgid "JW Player Configuration"
+#~ msgstr "Cài đặt JW Player"
+
+#~ msgid ""
+#~ "Provide informations for player working. JW Player is the most powerful & "
+#~ "flexible video platform powered by the fastest, most-used HTML5 online "
+#~ "video player."
+#~ msgstr ""
+#~ "Cung cấp thông tin cho trình phát video hoạt động. JW Player là trình "
+#~ "phát video mạnh mẽ và linh hoạt được hỗ trợ trên nền tảng nhanh nhất, đây "
+#~ "trình phát video HTML5 được sử dụng nhiều nhất."
+
+#~ msgid "Background"
+#~ msgstr "Hình nền"
+
+#~ msgid "Using JW Player as your main player?"
+#~ msgstr "Sử dụng JW Player làm trình phát chính?"
+
+#~ msgid "Use JW Player"
+#~ msgstr "Sử dụng JW Player"
+
+#~ msgid "Player"
+#~ msgstr "Trình phát"
+
+#~ msgctxt "jw player"
+#~ msgid "Key"
+#~ msgstr "Mã"
+
+#~ msgid "Loading mirror..."
+#~ msgstr "Đang tải..."
+
+#~ msgid "RSS Feed"
+#~ msgstr "Dòng tin RSS"
+
+#~ msgid ""
+#~ "Customize your website RSS Feed. You can choose what post type appears on "
+#~ "the feed."
+#~ msgstr ""
+#~ "Tùy chỉnh dòng tin RSS trên trang web của bạn. Bạn có thể chọn loại bài "
+#~ "viết nào được phép xuất hiện trên dòng tin."
+
+#~ msgid "%s Feed"
+#~ msgstr "Dòng tin %s"
+
+#~ msgid "Allow %s (%s) appears on site feed."
+#~ msgstr "Cho phép %s (%s) xuất hiện trên dòng tin RSS của trang."
+
+#~ msgid "Trending"
+#~ msgstr "Xu hướng"
+
+#~ msgctxt "form add post"
+#~ msgid "Scheduling postings"
+#~ msgstr "Lên lịch đăng bài"
+
+#~ msgctxt "form add post"
+#~ msgid "Post information"
+#~ msgstr "Thông tin bài viết"
+
+#~ msgctxt "form add post"
+#~ msgid "Contact information"
+#~ msgstr "Thông tin liên hệ"
+
+#~ msgctxt "form add post"
+#~ msgid "Preview post"
+#~ msgstr "Xác nhận bài viết"
+
+#~ msgctxt "form add post"
+#~ msgid "Type of post"
+#~ msgstr "Thể loại bài viết"
+
+#~ msgid "Free"
+#~ msgstr "Miễn phí"
+
+#~ msgctxt "form add post"
+#~ msgid "Normal post"
+#~ msgstr "Bài viết thông thường"
+
+#~ msgctxt "form add post"
+#~ msgid "Special VIP post"
+#~ msgstr "Bài viết VIP đặc biệt"
+
+#~ msgctxt "form add post"
+#~ msgid "Start date"
+#~ msgstr "Từ ngày"
+
+#~ msgctxt "form add post"
+#~ msgid "To date"
+#~ msgstr "Đến ngày"
+
+#~ msgctxt "form add post"
+#~ msgid "Posting fee"
+#~ msgstr "Chi phí đăng tin"
+
+#~ msgid "Post type"
+#~ msgstr "Loại bài viết"
+
+#~ msgid "Please enter a title."
+#~ msgstr "Xin vui lòng nhập tiêu đề."
+
+#~ msgid "Post content:"
+#~ msgstr "Nội dung bài viết:"
+
+#~ msgid "Gallery:"
+#~ msgstr "Ảnh thư viện:"
+
+#~ msgid "Your name"
+#~ msgstr "Tên của bạn"
+
+#~ msgid "Address"
+#~ msgstr "Địa chỉ"
+
+#~ msgid "Phone"
+#~ msgstr "Điện thoại"
+
+#~ msgid "Mobile"
+#~ msgstr "Di động"
+
+#~ msgid "Post title:"
+#~ msgstr "Tiêu đề bài viết:"
+
+#~ msgctxt "form add post"
+#~ msgid "Start date:"
+#~ msgstr "Từ ngày:"
+
+#~ msgctxt "form add post"
+#~ msgid "To date:"
+#~ msgstr "Đến ngày:"
+
+#~ msgctxt "form add post"
+#~ msgid "Type of post:"
+#~ msgstr "Thể loại bài viết:"
+
+#~ msgid "Contact name:"
+#~ msgstr "Tên liên hệ:"
+
+#~ msgid "Mobile:"
+#~ msgstr "Di động:"
+
+#~ msgid "Total cost:"
+#~ msgstr "Tổng chi phí:"
+
+#~ msgid "Add post"
+#~ msgstr "Thêm bài viết"
+
+#~ msgid "Previous"
+#~ msgstr "Trước"
+
+#~ msgid "Next"
+#~ msgstr "Tiếp"
+
+#~ msgid "VIP Management"
+#~ msgstr "Quản lý VIP"
+
+#~ msgid "Coin Rate"
+#~ msgstr "Tỷ giá chuyển đổi coin"
+
+#~ msgid "Conversion rate $1 into coin. For example: $1 = 100."
+#~ msgstr "Tỷ giá chuyển đổi $1 thành coin. Ví dụ như $1 = 100."
+
+#~ msgid "Post Price"
+#~ msgstr "Chi phí viết bài"
+
+#~ msgid "VIP post costs by day."
+#~ msgstr "Chi phí cho bài viết VIP mỗi ngày."
+
+#~ msgid "Allow user add new VIP post then pay later."
+#~ msgstr "Cho phép người dùng đăng tin VIP sau đó thanh toán sau."
+
+#~ msgid "Pay Later"
+#~ msgstr "Thanh toán sau"
+
+#~ msgid "Add button for user upload gallery images."
+#~ msgstr "Thêm nút cho người dùng tải lên ảnh thư viện."
+
+#~ msgid "Upload Gallery"
+#~ msgstr "Tải ảnh thư viện"
+
+#~ msgid "Custom Messages"
+#~ msgstr "Tùy chỉnh các tin nhắn"
+
+#~ msgid "Change messages on add new post form."
+#~ msgstr "Thay đổi các tin nhắn trên form đăng bài viết."
+
+#~ msgid "Normal Post Description"
+#~ msgstr "Mô tả bài viết bình thường"
+
+#~ msgid "VIP Post Description"
+#~ msgstr "Mô tả bài viết VIP"
+
+#~ msgid "Confirm Post Notice"
+#~ msgstr "Ghi chú xác nhận đăng tin"
+
+#~ msgid "VIP Post Added Message"
+#~ msgstr "Tin nhắn đăng tin VIP"
+
+#~ msgid "VIP Post Content Info"
+#~ msgstr "Chú thích nội dung VIP"
+
+#~ msgid "You do not have enough coin to add more day for VIP content."
+#~ msgstr "Bạn không có đủ coin để thêm ngày vào nội dung VIP."
+
+#~ msgid "You have added %s more VIP days for this post."
+#~ msgstr "Bạn vừa mới thêm %s ngày VIP cho bài viết này."
+
+#~ msgid "You do not have enough coin to post VIP content."
+#~ msgstr "Bạn không có đủ coin để đăng nội dung VIP."
+
+#~ msgid ""
+#~ "You must have at least %s coin to add VIP content. Please add more coin."
+#~ msgstr ""
+#~ "Bạn phải có ít nhất %s coin để có thể đăng nội dung VIP. Xin vui lòng nạp "
+#~ "thêm coin."
+
+#~ msgid "VIP Content Information"
+#~ msgstr "Thông tin nội dung VIP"
+
+#~ msgid "VIP:"
+#~ msgstr "VIP:"
+
+#~ msgid "Mark this post as VIP content."
+#~ msgstr "Đánh dấu bài viết này là nội dung VIP."
+
+#~ msgid "Expiry day:"
+#~ msgstr "Ngày hết hạn:"
+
+#~ msgid "Add more day for your VIP content. %s coins per day."
+#~ msgstr "Thêm số ngày vào nội dung VIP của bạn. %s coin mỗi ngày."
+
+#~ msgid "Add more day:"
+#~ msgstr "Thêm ngày:"
+
+#~ msgid "VIP Contact Information"
+#~ msgstr "Thông tin người đăng tin VIP"
+
+#~ msgid "Full Name:"
+#~ msgstr "Họ và tên:"
+
+#~ msgid "Total Cost:"
+#~ msgstr "Tổng thanh toán:"
+
+#~ msgid "WooCommerce"
+#~ msgstr "Trang shop"
+
+#~ msgid "USD to Vietnam Dong Rate"
+#~ msgstr "Tỷ giá USD sang VNĐ"
+
+#~ msgid "Development"
+#~ msgstr "Phát triển"
+
+#~ msgid ""
+#~ "<strong>Note:</strong> New theme core version has been released. Please "
+#~ "take time to <a href=\"%s\" target=\"_blank\">update it</a>. If you are "
+#~ "not theme author, just leave this message."
+#~ msgstr ""
+#~ "<strong>Chú ý:</strong> Phiên bản giao diện mới đã được phát hành. Xin "
+#~ "vui lòng dành thời gian để <a href=\"%s\" target=\"_blank\">nâng cấp nó</"
+#~ "a>. Nếu bạn không phải là tác giả của giao diện, bạn chỉ việc tắt thông "
+#~ "báo này đi."
+
+#~ msgid ""
+#~ "<strong>Error:</strong> You are using PHP version %s, please upgrade PHP "
+#~ "version to at least %s."
+#~ msgstr ""
+#~ "<strong>Lỗi:</strong> Bạn đang sử dụng phiên bản PHP %s, xin vui lòng "
+#~ "nâng cấp lên phiên bản PHP %s hoặc cao hơn."
+
+#~ msgid "Invalid PHP Version"
+#~ msgstr "Phiên bản PHP không hợp lệ"
+
+#~ msgid "Invalid Theme Core Version"
+#~ msgstr "Phiên bản nhân giao diện không hợp lệ"
+
+#~ msgid ""
+#~ "<strong>Error:</strong> Plugin <code>%s</code> requires theme core "
+#~ "version <code>%s</code> or higher. Please upgrade your theme or downgrade "
+#~ "this plugin to older version."
+#~ msgstr ""
+#~ "<strong>Lỗi:</strong> Plugin <code>%s</code> yêu cầu dùng phiên bản nhân "
+#~ "giao diện <code>%s</code> hoặc cao hơn. Xin vui lòng nâng cấp giao diện "
+#~ "của bạn hoặc hạ phiên bản plugin này xuống."
+
+#~ msgid ""
+#~ "<strong>Plugin Extensions by HocWP Team:</strong> You must using theme "
+#~ "core version at least %s. Please upgrade your theme or contact theme "
+#~ "author for more details. You may also downgrade this plugin to older "
+#~ "version but it is not recommended."
+#~ msgstr ""
+#~ "<strong>Plugin Extensions by HocWP Team:</strong> Bạn phải dùng phiên bản "
+#~ "nhân của giao diện từ %s trở lên. Xin vui lòng nâng cấp giao diện của bạn "
+#~ "hoặc liên hệ với tác giả để biết thêm thông tin. Bạn cũng có thể hạ phiên "
+#~ "bản của plugin xuống phiên bản thấp hơn, nhưng chúng tôi không khuyến "
+#~ "khích bạn làm việc này."
+
+#~ msgid ""
+#~ "<strong>Plugin Extensions by HocWP Team:</strong> You must use the theme "
+#~ "written by the HocWP Team or the directory of the theme must be named as "
+#~ "<code>hocwp-theme</code>, you can change your theme <a href=\"%s\">here</"
+#~ "a>."
+#~ msgstr ""
+#~ "<strong>Plugin Extensions by HocWP Team:</strong> Bạn phải dùng giao diện "
+#~ "được thực hiện bởi HocWP Team hoặc đường dẫn thư mục của giao diện phải "
+#~ "là <code>hocwp-theme</code>, bạn có thể thay đổi giao diện <a href=\"%s"
+#~ "\">tại đây</a>."
+
+#~ msgid "Category:"
+#~ msgstr "Chuyên mục:"
+
+#~ msgid "VIP Expiry Date:"
+#~ msgstr "Ngày hết hạn VIP:"
+
+#~ msgid "VIP"
+#~ msgstr "VIP"
+
+#~ msgid "Choose %s"
+#~ msgstr "Chọn %s"
+
+#~ msgid "You will pay %s coins for posting VIP content."
+#~ msgstr "Bạn sẽ phải trả %s coin để đăng nội dung VIP."
+
+#~ msgid "Add VIP Post"
+#~ msgstr "Thêm bài viết VIP"
