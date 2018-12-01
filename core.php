@@ -3,8 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Auto_Add_Poll_Core {
+class WP_Custom_Coupons_Core {
 	protected static $instance;
+
+	public $require_php_version = '5.6';
 
 	protected $plugin_file;
 	protected $version;
@@ -21,6 +23,9 @@ class Auto_Add_Poll_Core {
 	protected $labels;
 	protected $setting_args;
 	protected $options_page_callback;
+
+	public $sub_menu = true;
+	public $menu_icon = 'dashicons-admin-generic';
 
 	public function is_empty_string( $string ) {
 		return ( is_string( $string ) && empty( $string ) );
@@ -140,6 +145,12 @@ class Auto_Add_Poll_Core {
 		}
 
 		return false;
+	}
+
+	public function get_terms( $args = array() ) {
+		$query = new WP_Term_Query( $args );
+
+		return $query->get_terms();
 	}
 
 	public function get_terms_by_term( $taxonomy, $args = array() ) {
@@ -344,6 +355,61 @@ class Auto_Add_Poll_Core {
 		return $result;
 	}
 
+	public function get_image_sizes() {
+		global $_wp_additional_image_sizes;
+
+		$sizes = array();
+
+		foreach ( get_intermediate_image_sizes() as $_size ) {
+			if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
+				$sizes[ $_size ]['width']  = get_option( "{$_size}_size_w" );
+				$sizes[ $_size ]['height'] = get_option( "{$_size}_size_h" );
+				$sizes[ $_size ]['crop']   = (bool) get_option( "{$_size}_crop" );
+			} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+				$sizes[ $_size ] = array(
+					'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
+					'height' => $_wp_additional_image_sizes[ $_size ]['height'],
+					'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'],
+				);
+			}
+		}
+
+		return $sizes;
+	}
+
+	public function webshot( $website_url, $size = '' ) {
+		if ( ! $website_url || empty ( $website_url ) ) {
+			return false;
+		}
+
+		$sizes = $this->get_image_sizes();
+
+		if ( is_string( $size ) ) {
+			if ( ! empty( $size ) && isset( $sizes[ $size ] ) ) {
+				$size = $sizes[ $size ];
+			}
+		}
+
+		if ( ! is_array( $size ) ) {
+			if ( $this->array_has_value( $sizes ) ) {
+				$size = current( $sizes );
+			} else {
+				$size = array();
+			}
+		}
+
+		$size = wp_parse_args( $size, array(
+			'width'  => 800,
+			'height' => 500
+		) );
+
+		$url = 'http://s.wordpress.com/mshots/v1/' . urlencode( $website_url );
+
+		$url = add_query_arg( array( 'h' => $size['height'], 'w' => $size['width'] ), $url );
+
+		return $url;
+	}
+
 	public function is_image_url( $url ) {
 		$img_formats = array( 'png', 'jpg', 'jpeg', 'gif', 'tiff', 'bmp', 'ico' );
 
@@ -431,6 +497,50 @@ class Auto_Add_Poll_Core {
 		}
 
 		return $matches;
+	}
+
+	public function is_IP( $IP ) {
+		return filter_var( $IP, FILTER_VALIDATE_IP );
+	}
+
+	public function get_domain_name( $url, $root = false ) {
+		if ( ! is_string( $url ) || empty( $url ) ) {
+			return '';
+		}
+
+		if ( false === $this->string_contain( $url, 'http://' ) && false === $this->string_contain( $url, 'https://' ) ) {
+			$url = 'http://' . $url;
+		}
+
+		$url    = strval( $url );
+		$parse  = parse_url( $url );
+		$result = isset( $parse['host'] ) ? $parse['host'] : '';
+
+		if ( $root && ! $this->is_IP( $result ) ) {
+			$tmp = explode( '.', $result );
+
+			while ( count( $tmp ) > 2 ) {
+				array_shift( $tmp );
+			}
+
+			$result = implode( '.', $tmp );
+		}
+
+		return $result;
+	}
+
+	public function post_exists( $mixed ) {
+		if ( $this->is_positive_number( $mixed ) ) {
+			$obj = get_post( $mixed );
+
+			return ( $obj instanceof WP_Post );
+		}
+
+		if ( is_string( $mixed ) ) {
+			return post_exists( $mixed );
+		}
+
+		return false;
 	}
 
 	public function create_install_plugin_url( $plugin_slug ) {
@@ -610,7 +720,12 @@ class Auto_Add_Poll_Core {
 					$this->options_page_callback = array( $this, 'options_page_callback' );
 				}
 
-				add_options_page( $page_title, $menu_title, 'manage_options', $this->option_name, $this->options_page_callback );
+				if ( $this->sub_menu ) {
+					add_options_page( $page_title, $menu_title, 'manage_options', $this->option_name, $this->options_page_callback );
+				} else {
+					add_menu_page( $page_title, $menu_title, 'manage_options', $this->option_name, $this->options_page_callback, $this->menu_icon );
+					add_submenu_page( $this->option_name, $page_title, $menu_title, 'manage_options', $this->option_name, $this->options_page_callback );
+				}
 			}
 		}
 	}
@@ -639,6 +754,8 @@ class Auto_Add_Poll_Core {
 			<h1><?php echo esc_html( $headline ); ?></h1>
 			<hr class="wp-header-end">
 			<?php
+			settings_errors();
+
 			if ( 1 < count( $tabs ) ) {
 				?>
 				<div id="nav">
@@ -724,6 +841,18 @@ class Auto_Add_Poll_Core {
 		$id    = isset( $args['label_for'] ) ? $args['label_for'] : '';
 		$name  = isset( $args['name'] ) ? $args['name'] : '';
 
+		$attributes = isset( $args['attributes'] ) ? $args['attributes'] : '';
+
+		$atts = '';
+
+		if ( $this->array_has_value( $attributes ) ) {
+			foreach ( (array) $attributes as $key => $att_value ) {
+				$atts .= $key . '="' . esc_attr( $att_value ) . '" ';
+			}
+
+			$atts = trim( $atts );
+		}
+
 		if ( 'checkbox' == $type || 'radio' == $type ) {
 			$label     = isset( $args['label'] ) ? $args['label'] : '';
 			$show_desc = true;
@@ -739,7 +868,7 @@ class Auto_Add_Poll_Core {
 				<input name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>"
 				       id="<?php echo esc_attr( $id ); ?>"
 				       value="<?php echo esc_attr( $field_value ); ?>"
-				       class="regular-text"<?php checked( $value, $field_value ); ?>> <?php echo $label; ?>
+				       class="regular-text"<?php checked( $value, $field_value ); ?><?php echo $atts; ?>> <?php echo $label; ?>
 			</label>
 			<?php
 			if ( $show_desc ) {
@@ -751,7 +880,7 @@ class Auto_Add_Poll_Core {
 			<input name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>"
 			       id="<?php echo esc_attr( $id ); ?>"
 			       value="<?php echo esc_attr( $value ); ?>"
-			       class="regular-text">
+			       class="regular-text"<?php echo $atts; ?>>
 			<?php
 			$this->field_description( $args );
 		}
@@ -779,6 +908,7 @@ class Auto_Add_Poll_Core {
 		}
 
 		wp_editor( $value, $id, $args );
+		$this->field_description( $args );
 	}
 
 	public function admin_setting_field_select( $args ) {
@@ -789,9 +919,11 @@ class Auto_Add_Poll_Core {
 
 		$option_none = isset( $args['option_none'] ) ? $args['option_none'] : '';
 		$label       = isset( $args['label'] ) ? $args['label'] : '';
+		$class       = isset( $args['class'] ) ? $args['class'] : 'widefat';
 		?>
 		<label for="<?php echo esc_attr( $id ); ?>"><?php echo $label; ?></label>
-		<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>" class="widefat">
+		<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>"
+		        class="<?php echo $class; ?>">
 			<?php
 			if ( empty( $option_none ) ) {
 				?>
@@ -847,7 +979,7 @@ class Auto_Add_Poll_Core {
 		       id="<?php echo esc_attr( $id ); ?>"
 		       value="<?php echo esc_attr( $media_url ); ?>"
 		       class="regular-text">
-		<button type="button" class="change-media hocwp button"
+		<button type="button" class="change-media custom-media button"
 		        data-remove-text="<?php echo $remove_text; ?>"
 		        data-add-text="<?php echo $add_text; ?>"><?php echo $button_text; ?></button>
 		<input name="<?php echo esc_attr( $name ); ?>[id]" type="hidden" value="<?php echo esc_attr( $media_id ); ?>">
@@ -874,49 +1006,104 @@ class Auto_Add_Poll_Core {
 	}
 
 	public function admin_footer() {
+		$button_text = __( 'Insert Media', $this->textdomain );
 		?>
 		<script>
 			jQuery(document).ready(function ($) {
-				$("body").on("click", ".hocwp.change-media", function (e) {
-					e.preventDefault();
-					var element = $(this),
-						input = element.prev(),
-						value = input.val(),
-						inputId = element.next(),
-						custom_uploader;
+				var body = $("body");
 
-					if ($.trim(value)) {
-						input.val("");
-						element.text(element.attr("data-add-text"));
-						inputId.val("");
-					} else {
-						custom_uploader = wp.media({
-							title: "Insert Media",
-							library: {},
-							button: {
-								text: "Insert Media"
-							},
-							multiple: false
-						}).on("select", function () {
-							var attachment = custom_uploader.state().get("selection").first().toJSON();
+				(function () {
+					$("body").on("click", ".custom-media.change-media", function (e) {
+						e.preventDefault();
+						var element = $(this),
+							input = element.prev(),
+							value = input.val(),
+							inputId = element.next(),
+							custom_uploader;
 
-							input.val(attachment.url);
-							element.text(element.attr("data-remove-text"));
-							inputId.val(attachment.id);
-						}).open();
+						if ($.trim(value)) {
+							input.val("");
+							element.text(element.attr("data-add-text"));
+							inputId.val("");
+						} else {
+							custom_uploader = wp.media({
+								title: "<?php echo $button_text; ?>",
+								library: {},
+								button: {
+									text: "<?php echo $button_text; ?>"
+								},
+								multiple: false
+							}).on("select", function () {
+								var attachment = custom_uploader.state().get("selection").first().toJSON();
+
+								input.val(attachment.url);
+								element.text(element.attr("data-remove-text"));
+								inputId.val(attachment.id);
+							}).open();
+						}
+					});
+				})();
+
+				// Fix current submenu but parent menu not open.
+				(function () {
+					function wpFixMenuNotOpen(menuItem) {
+						if (menuItem.length) {
+							var topMenu = menuItem.closest("li.menu-top"),
+								notCurrentClass = "wp-not-current-submenu";
+
+							if (topMenu.hasClass(notCurrentClass)) {
+								var openClass = "wp-has-current-submenu wp-menu-open";
+								topMenu.removeClass(notCurrentClass).addClass(openClass);
+								topMenu.children("a").removeClass(notCurrentClass).addClass(openClass);
+							}
+						}
 					}
-				});
+
+					$(".wp-has-submenu .wp-submenu li.current").each(function () {
+						var that = this,
+							element = $(that);
+
+						wpFixMenuNotOpen(element);
+					});
+
+					if (body.hasClass("post-new-php") || body.hasClass("post-php")) {
+						var postType = body.find("#post_type");
+
+						if (postType.length && $.trim(postType.val())) {
+							var menuLink = body.find("a[href='edit.php?post_type=" + postType.val() + "']");
+
+							if (menuLink.length) {
+								var menuItem = menuLink.parent();
+
+								menuItem.addClass("current");
+								wpFixMenuNotOpen(menuItem);
+							}
+						}
+					}
+				})();
 			});
 		</script>
 		<?php
 	}
 
 	public function created_by_log() {
-		$name = $this->get_plugin_info( 'Name' );
+		$show = apply_filters( 'hocwp_plugin_console_log_created_by', true );
+
+		if ( $show ) {
+			$name = $this->get_plugin_info( 'Name' );
+			?>
+			<script>
+				console.log("%c<?php printf(__('Plugin %s is created by %s', $this->textdomain), $name, 'HocWP Team - http://hocwp.net'); ?>", "font-size:16px;color:red;font-family:tahoma;padding:10px 0");
+			</script>
+			<?php
+		}
+	}
+
+	public function admin_notices_require_php_version() {
 		?>
-		<script>
-			console.log("%c<?php printf(__('Plugin %s is created by %s', $this->textdomain), $name, 'HocWP Team - http://hocwp.net'); ?>", "font-size:16px;color:red;font-family:tahoma;padding:10px 0");
-		</script>
+		<div class="updated settings-error error notice is-dismissible">
+			<p><?php printf( __( '<strong>Error:</strong> Plugin %s requires PHP version at least %s, please upgrade it or contact your hosting provider.', $this->textdomain ), $this->get_plugin_info( 'Name' ), $this->require_php_version ); ?></p>
+		</div>
 		<?php
 	}
 
@@ -938,6 +1125,14 @@ class Auto_Add_Poll_Core {
 		$this->labels['options_page']['page_title'] = $this->get_plugin_info( 'Name' );
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+
+		$version = phpversion();
+
+		if ( version_compare( $this->require_php_version, $version, '>' ) ) {
+			add_action( 'admin_notices', array( $this, 'admin_notices_require_php_version' ) );
+
+			return;
+		}
 
 		if ( is_admin() ) {
 			add_action( 'admin_init', array( $this, 'admin_init_action' ), 20 );
