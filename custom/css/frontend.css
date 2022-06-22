@@ -1,0 +1,71 @@
+.woo-checkout-images .preview {
+    display: flex;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.woo-checkout-images .preview > * {
+    flex-basis: 20%;
+    max-width: 20%;
+    padding: 5px;
+    box-sizing: border-box;
+    opacity: .8;
+}
+
+.woo-checkout-images .preview > a,
+.woo-checkout-images .preview > img {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 20%);
+    background-color: #f1f1f1;
+    height: auto;
+    object-fit: cover;
+    align-items: center;
+    object-position: center;
+    min-width: 94px;
+    display: flex;
+}
+
+.woo-checkout-images .preview > a > img {
+    height: auto;
+    object-fit: cover;
+    align-items: center;
+    object-position: center;
+    max-height: 200px;
+    max-width: 100%;
+}
+
+.woo-checkout-images .preview img {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.woo-checkout-images .preview img:hover {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.woo-checkout-images .preview > a:hover {
+    opacity: 1;
+}
+
+.woo-checkout-images .woocommerce-input-wrapper {
+    display: block;
+}
+
+.woo-checkout-images .desc {
+    font-size: 14px;
+    color: #999;
+    display: block;
+    margin: 5px 0;
+    line-height: 17px;
+}
+
+.woo-checkout-images .desc strong {
+    color: #444;
+}

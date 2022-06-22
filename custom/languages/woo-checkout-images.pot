@@ -1,0 +1,201 @@
+# Copyright (C) 2016 Automattic
+# This file is distributed under the GNU General Public License v2 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SB Core\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
+"POT-Creation-Date: 2021-11-11 10:54+0700\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-12-23 16:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: HocWP Team - hocwp.net@gmail.com - www.hocwp.net\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: custom\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: core/core.php:166
+msgid "Load more"
+msgstr ""
+
+#: core/core.php:441
+#, php-format
+msgid "Plugin %s is created by %s"
+msgstr ""
+
+#: core/core.php:550
+#, php-format
+msgid "<strong>%s:</strong> You must install and activate thesse required plugins: %s."
+msgstr ""
+
+#: core/trait-admin.php:13
+msgid "Settings"
+msgstr ""
+
+#: core/trait-admin.php:219
+msgid "Submit"
+msgstr ""
+
+#: core/trait-admin.php:384
+msgid "Pixels"
+msgstr ""
+
+#: core/trait-admin.php:522
+msgid "-- Choose post --"
+msgstr ""
+
+#: core/trait-admin.php:526
+#, php-format
+msgid "-- Choose %s --"
+msgstr ""
+
+#: core/trait-admin.php:552
+msgid "Remove"
+msgstr ""
+
+#: core/trait-admin.php:553
+msgid "Add"
+msgstr ""
+
+#: core/trait-admin.php:603
+msgid "Insert Media"
+msgstr ""
+
+#: core/trait-admin.php:623
+msgid "Backup done!"
+msgstr ""
+
+#: core/trait-admin.php:712
+#, php-format
+msgid "<strong>Error:</strong> Plugin %s requires PHP version at least %s, please upgrade it or contact your hosting provider."
+msgstr ""
+
+#: core/trait-admin.php:733
+msgid "Plugin Settings"
+msgstr ""
+
+#: core/trait-admin.php:736
+msgid "All HocWP Plugins Settings"
+msgstr ""
+
+#: core/trait-admin.php:753
+#, php-format
+msgid "%s Settings Page"
+msgstr ""
+
+#: core/trait-admin.php:778
+#, php-format
+msgid "<strong>Missing required plugin:</strong> You must install and activate plugin <a href=\"%s\">%s</a>."
+msgstr ""
+
+#: core/trait-admin.php:829
+#, php-format
+msgid "<strong>Warning:</strong> You can choose one term only for taxonomy %s."
+msgstr ""
+
+#: core/trait-utils.php:261
+msgid "Invalid Google API Key."
+msgstr ""
+
+#: core/trait-utils.php:1426
+msgid "The <strong>$sql_column</strong> argument just only contains MySQL query inside (), it isn't full MySQL query."
+msgstr ""
+
+#: core/wp-background-process.php:425
+#, php-format
+msgid "Every %d Minutes"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:109
+msgid "Shop order"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:121
+msgid "View customer product images"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:122
+msgid "View"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:130
+msgid "View images"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:170
+msgid "Filter by order"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:173
+msgid "-- Choose shop order --"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:175
+msgid "All orders"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:232
+msgid "Customer Product Sizes"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:268
+msgid "No images found!"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:274
+msgid "There was an error caused, please try again."
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:348
+msgid "The max number of images user can upload."
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:352
+msgid "Max Image Count"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:354
+#, php-format
+msgid "The max image size (KB). The default size (%s) will be used if leave empty."
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:357
+msgid "Max Image Size"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:363
+msgid "Upload Description"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:391
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: custom/inc/class-plugin-admin.php:392
+msgid "All images have been deleted successfully."
+msgstr ""
+
+#: custom/inc/class-plugin-frontend.php:70
+msgid "Your Product Sizes"
+msgstr ""
+
+#: custom/inc/class-plugin-frontend.php:165
+#, php-format
+msgid "You cannot upload more than %s images."
+msgstr ""
+
+#: custom/inc/class-plugin-frontend.php:166
+#, php-format
+msgid "You cannot upload image size larger than %s."
+msgstr ""
+
+#: custom/inc/trait-functions.php:23
+msgid "Remove all"
+msgstr ""

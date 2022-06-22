@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 define( 'DOING_AJAX', true );
 
 if ( ! defined( 'WP_ADMIN' ) ) {

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SB Core\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
-"POT-Creation-Date: 2019-10-07 21:34+0700\n"
-"PO-Revision-Date: 2019-10-07 21:34+0700\n"
+"POT-Creation-Date: 2021-11-11 10:54+0700\n"
+"PO-Revision-Date: 2021-11-11 10:55+0700\n"
 "Last-Translator: \n"
 "Language-Team: HocWP Team - hocwp.net@gmail.com - www.hocwp.net\n"
 "Language: vi\n"
@@ -13,53 +13,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: custom\n"
+"X-Poedit-SearchPath-1: .\n"
 
-#: core/core.php:270
-msgid "Invalid Google API Key."
-msgstr "Mã Google API Key không hợp lệ."
+#: core/core.php:166
+msgid "Load more"
+msgstr "Tải thêm"
 
-#: core/core.php:1355
-msgid "Settings"
-msgstr "Cài đặt"
-
-#: core/core.php:1632
-msgid "Pixels"
-msgstr "Điểm ảnh"
-
-#: core/core.php:1764
-msgid "-- Choose post --"
-msgstr "-- Chọn bài viết --"
-
-#: core/core.php:1768
-#, php-format
-msgid "-- Choose %s --"
-msgstr "-- Chọn %s --"
-
-#: core/core.php:1794
-msgid "Remove"
-msgstr "Xóa"
-
-#: core/core.php:1795
-msgid "Add"
-msgstr "Thêm"
-
-#: core/core.php:1838
-msgid "Insert Media"
-msgstr "Thêm tập tin"
-
-#: core/core.php:1941
+#: core/core.php:441
 #, php-format
 msgid "Plugin %s is created by %s"
 msgstr "Plugin %s được tạo bởi %s"
 
-#: core/core.php:1950
+#: core/core.php:550
+#, php-format
+msgid ""
+"<strong>%s:</strong> You must install and activate thesse required plugins: "
+"%s."
+msgstr ""
+"<strong>%s:</strong> Bạn phải cài đặt và kích hoạt các plugin bắt buộc: %s."
+
+#: core/trait-admin.php:13
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: core/trait-admin.php:219
+msgid "Submit"
+msgstr "Hoàn tất"
+
+#: core/trait-admin.php:384
+msgid "Pixels"
+msgstr "Điểm ảnh"
+
+#: core/trait-admin.php:522
+msgid "-- Choose post --"
+msgstr "-- Chọn bài viết --"
+
+#: core/trait-admin.php:526
+#, php-format
+msgid "-- Choose %s --"
+msgstr "-- Chọn %s --"
+
+#: core/trait-admin.php:552
+msgid "Remove"
+msgstr "Xóa"
+
+#: core/trait-admin.php:553
+msgid "Add"
+msgstr "Thêm"
+
+#: core/trait-admin.php:603
+msgid "Insert Media"
+msgstr "Thêm tập tin"
+
+#: core/trait-admin.php:623
+msgid "Backup done!"
+msgstr "Đã chạy xong sao lưu!"
+
+#: core/trait-admin.php:712
 #, php-format
 msgid ""
 "<strong>Error:</strong> Plugin %s requires PHP version at least %s, please "
@@ -68,22 +85,40 @@ msgstr ""
 "<strong>Lỗi:</strong> Plugin %s yêu cầu phiên bản PHP từ %s, xin vui lòng "
 "nâng cấp hoặc liên hệ với nhà cung cấp hosting."
 
-#: core/core.php:1998
+#: core/trait-admin.php:733
+msgid "Plugin Settings"
+msgstr "Cài đặt plugin"
+
+#: core/trait-admin.php:736
+msgid "All HocWP Plugins Settings"
+msgstr "Tất cả cài đặt plugin bởi HocWP"
+
+#: core/trait-admin.php:753
+#, php-format
+msgid "%s Settings Page"
+msgstr "Trang cài đặt %s"
+
+#: core/trait-admin.php:778
+#, php-format
+msgid ""
+"<strong>Missing required plugin:</strong> You must install and activate "
+"plugin <a href=\"%s\">%s</a>."
+msgstr ""
+"<strong>Thiếu plugin bắt buộc:</strong> Bạn phải cài đặt và kích hoạt plugin "
+"<a href=\"%s\">%s</a>."
+
+#: core/trait-admin.php:829
 #, php-format
 msgid "<strong>Warning:</strong> You can choose one term only for taxonomy %s."
 msgstr ""
 "<strong>Cảnh báo:</strong> Bạn chỉ có thể chọn một mục duy nhất cho taxonomy "
 "%s."
 
-#: core/core.php:2162
-#, php-format
-msgid ""
-"<strong>%s:</strong> You must install and activate thesse required plugins: "
-"%s."
-msgstr ""
-"<strong>%s:</strong> Bạn phải cài đặt và kích hoạt các plugin bắt buộc: %s."
+#: core/trait-utils.php:261
+msgid "Invalid Google API Key."
+msgstr "Mã Google API Key không hợp lệ."
 
-#: core/core.php:2170
+#: core/trait-utils.php:1426
 msgid ""
 "The <strong>$sql_column</strong> argument just only contains MySQL query "
 "inside (), it isn't full MySQL query."
@@ -91,37 +126,652 @@ msgstr ""
 "Tham số <strong>$sql_column</strong> chỉ chứa truy vấn MySQL bên trong ngoặc "
 "đơn (), chứ không phải chứa câu truy vấn MySQL đầy đủ."
 
-#: main.php:47
-msgid "AJAX Load More"
-msgstr "Tải thêm AJAX"
+#: core/wp-background-process.php:425
+#, php-format
+msgid "Every %d Minutes"
+msgstr "Mỗi %d phút"
 
-#: main.php:75
-msgid "No more posts"
-msgstr "Không còn bài viết"
+#: custom/inc/class-plugin-admin.php:109
+msgid "Shop order"
+msgstr "Đơn hàng"
 
-#: main.php:77 main.php:93
-msgid "Loading more"
-msgstr "Đang tải thêm"
+#: custom/inc/class-plugin-admin.php:121
+msgid "View customer product images"
+msgstr "Xem ảnh size của khách hàng"
 
-#: main.php:92 main.php:93
-msgid "Load more"
-msgstr "Tải thêm"
+#: custom/inc/class-plugin-admin.php:122
+msgid "View"
+msgstr "Xem"
 
-#: main.php:103
+#: custom/inc/class-plugin-admin.php:130
+msgid "View images"
+msgstr "Xem hình ảnh"
+
+#: custom/inc/class-plugin-admin.php:170
+msgid "Filter by order"
+msgstr "Lọc theo đơn hàng"
+
+#: custom/inc/class-plugin-admin.php:173
+msgid "-- Choose shop order --"
+msgstr "-- Chọn đơn hàng --"
+
+#: custom/inc/class-plugin-admin.php:175
+msgid "All orders"
+msgstr "Tất cả đơn hàng"
+
+#: custom/inc/class-plugin-admin.php:232
+msgid "Customer Product Sizes"
+msgstr "Ảnh size của khách hàng"
+
+#: custom/inc/class-plugin-admin.php:268
+msgid "No images found!"
+msgstr "Không có hình ảnh nào được tìm thấy!"
+
+#: custom/inc/class-plugin-admin.php:274
+msgid "There was an error caused, please try again."
+msgstr "Đã có lỗi xảy ra, xin vui lòng thử lại."
+
+#: custom/inc/class-plugin-admin.php:348
+msgid "The max number of images user can upload."
+msgstr "Số lượng hình ảnh tối đa cho phép người dùng tải lên."
+
+#: custom/inc/class-plugin-admin.php:352
+msgid "Max Image Count"
+msgstr "Số lượng hình ảnh tối đa"
+
+#: custom/inc/class-plugin-admin.php:354
+#, php-format
 msgid ""
-"Add body class you want to skip load more button. Each class separate by "
-"commas."
+"The max image size (KB). The default size (%s) will be used if leave empty."
 msgstr ""
-"Thêm thuộc tính class của thẻ body mà bạn muốn bỏ qua nút tải thêm. Mỗi "
-"class cách nhau bởi dấu phẩy."
+"Kích thước hình ảnh tối đa (định dạng KB). Kích thước hình ảnh tối đa mặc "
+"định (%s) sẽ được sử dụng nếu để trống."
 
-#: main.php:106
-msgid "Skip Body Class"
-msgstr "Bỏ qua body class"
+#: custom/inc/class-plugin-admin.php:357
+msgid "Max Image Size"
+msgstr "Kích thước hình ảnh tối đa"
 
-#: main.php:112
-msgid "Auto Load Offset"
-msgstr "Tự động tải offset"
+#: custom/inc/class-plugin-admin.php:363
+msgid "Upload Description"
+msgstr "Chú thích tải lên"
+
+#: custom/inc/class-plugin-admin.php:391
+msgid "Are you sure you want to delete?"
+msgstr "Bạn có chắc là muốn xóa hay không?"
+
+#: custom/inc/class-plugin-admin.php:392
+msgid "All images have been deleted successfully."
+msgstr "Tất cả hình ảnh đã được xóa thành công."
+
+#: custom/inc/class-plugin-frontend.php:70
+msgid "Your Product Sizes"
+msgstr "Gởi ảnh Size của bạn"
+
+#: custom/inc/class-plugin-frontend.php:165
+#, php-format
+msgid "You cannot upload more than %s images."
+msgstr "Bạn không thể tải lên nhiều hơn %s hình ảnh."
+
+#: custom/inc/class-plugin-frontend.php:166
+#, php-format
+msgid "You cannot upload image size larger than %s."
+msgstr "Bạn không thể tải lên hình ảnh có kích thước lớn hơn %s."
+
+#: custom/inc/trait-functions.php:23
+msgid "Remove all"
+msgstr "Xóa tất cả"
+
+#~ msgid "Tag Name"
+#~ msgstr "Tên thẻ"
+
+#~ msgid "HTML tag name which you want to insert images."
+#~ msgstr "Tên thẻ HTML mà bạn muốn chèn vào hình ảnh."
+
+#~ msgid "Number of Images"
+#~ msgstr "Số hình ảnh"
+
+#~ msgid ""
+#~ "Number of images to insert, images will be evenly distributed by default."
+#~ msgstr ""
+#~ "Số lượng hình ảnh cần chèn, mặc định hình ảnh sẽ được phân phối đều."
+
+#~ msgid "Before Image"
+#~ msgstr "Trước hình ảnh"
+
+#~ msgid "Custom HTML text insert before image."
+#~ msgstr "Văn bản HTML tùy chỉnh thêm vào trước hình ảnh."
+
+#~ msgid "After Image"
+#~ msgstr "Sau hình ảnh"
+
+#~ msgid "Custom HTML text insert after image."
+#~ msgstr "Văn bản HTML tùy chỉnh thêm vào sau hình ảnh."
+
+#~ msgid "Image Align"
+#~ msgstr "Căn chỉnh hình ảnh"
+
+#~ msgid "Left"
+#~ msgstr "Bên trái"
+
+#~ msgid "Center"
+#~ msgstr "Ở giữa"
+
+#~ msgid "Right"
+#~ msgstr "Bên phải"
+
+#~ msgid "None"
+#~ msgstr "Không"
+
+#~ msgid "Insert Images"
+#~ msgstr "Thêm hình ảnh"
+
+#~ msgid "Post Type"
+#~ msgstr "Loại bài viết"
+
+#~ msgid "Number character"
+#~ msgstr "Số ký tự"
+
+#~ msgid "Numerical"
+#~ msgstr "Số thứ tự"
+
+#~ msgid "LI"
+#~ msgstr "Li"
+
+#~ msgid "OL"
+#~ msgstr "OL"
+
+#~ msgid "UL"
+#~ msgstr "UL"
+
+#~ msgid "H2 Conditional"
+#~ msgstr "Điều kiện H2"
+
+#~ msgid "H3 Conditional"
+#~ msgstr "Điều kiện H3"
+
+#~ msgid "Search for newline content if there is no paragraph in the article?"
+#~ msgstr ""
+#~ "Tìm kiếm nội dung xuống dòng nếu không tìm thấy đoạn văn trong bài viết?"
+
+#~ msgid "Check New Line"
+#~ msgstr "Kiểm tra dòng mới"
+
+#, php-format
+#~ msgid "There is no tag name \"%s\" in post content."
+#~ msgstr "Không có thẻ tên \"%s\" trong nội dung bài viết."
+
+#~ msgid "Post's content has been updated!"
+#~ msgstr "Nội dung bài viết đã được cập nhật!"
+
+#~ msgid "Post's content has been updated, don't forget to click save button!"
+#~ msgstr "Nội dung bài viết đã được cập nhật, đừng quên nhấn nút lưu!"
+
+#~ msgid "Disable WordPress auto convert break line to new paragraph?"
+#~ msgstr ""
+#~ "Vô hiệu hóa WordPress tự động chuyển đổi ngắt dòng sang đoạn văn bản mới?"
+
+#~ msgid "Disable Autop"
+#~ msgstr "Hủy Autop"
+
+#~ msgid "Insert Images to Post Content"
+#~ msgstr "Thêm hình ảnh vào nội dung bài viết"
+
+#~ msgid "Insert"
+#~ msgstr "Thêm"
+
+#~ msgid "Are you sure you want to add an image to your post's content?"
+#~ msgstr "Bạn có chắc là muốn thêm hình ảnh vào nội dung bài viết?"
+
+#~ msgid "Remote Server Base URL"
+#~ msgstr "Đường dẫn cơ sở (URL) máy chủ"
+
+#~ msgid "Remote Server Base Dir"
+#~ msgstr "Đường dẫn cơ sở (path) máy chủ"
+
+#~ msgid "Remote Server Path"
+#~ msgstr "Đường dẫn máy chủ (path)"
+
+#~ msgid "Passive Mode"
+#~ msgstr "Passive Mode"
+
+#~ msgid "Connect to FTP server as passive mode."
+#~ msgstr "Kết nối tới máy chủ FTP bằng chế độ passive mode."
+
+#~ msgid "Auto Detect"
+#~ msgstr "Tự động nhận biết"
+
+#~ msgid "Find and update media url automatically."
+#~ msgstr "Tìm kiếm và cập nhật đường dẫn tập tin tự động."
+
+#~ msgid "FTP Connection"
+#~ msgstr "Kết nối FTP"
+
+#~ msgid "FTP Host"
+#~ msgstr "FTP Host"
+
+#~ msgid "FTP User"
+#~ msgstr "Tài khoản FTP"
+
+#~ msgid "FTP Password"
+#~ msgstr "Mật khẩu FTP"
+
+#~ msgid "FTP Port"
+#~ msgstr "FTP Port"
+
+#~ msgid ""
+#~ "Provides FTP connection information for uploading files to the server."
+#~ msgstr "Cung cấp thông tin kết nối FTP để tải tập tin lên máy chủ."
+
+#~ msgid "Choose Category"
+#~ msgstr "Chọn chuyên mục"
+
+#~ msgid "Sort Post Results"
+#~ msgstr "Kết quả sắp xếp"
+
+#~ msgid "Sort Posts"
+#~ msgstr "Sắp xếp bài viết"
+
+#~ msgid "Connect all selected posts with group"
+#~ msgstr "Kết nối tất cả bài viết được chọn với nhóm"
+
+#~ msgid "--Choose group--"
+#~ msgstr "-- Chọn nhóm --"
+
+#~ msgid "Apply"
+#~ msgstr "Áp dụng"
+
+#~ msgid "Close this box"
+#~ msgstr "Đóng hộp này"
+
+#~ msgid "All groups"
+#~ msgstr "Tất cả nhóm"
+
+#~ msgid "Group post"
+#~ msgstr "Gom nhóm"
+
+#~ msgid "Ungroup post"
+#~ msgstr "Hủy nhóm"
+
+#, php-format
+#~ msgid ""
+#~ "<strong>%s:</strong> The link relations are synchronized, please wait..."
+#~ msgstr ""
+#~ "<strong>%s:</strong> Các liên kết đang được đồng bộ hóa, xin vui lòng "
+#~ "đợi..."
+
+#, php-format
+#~ msgid ""
+#~ "<strong>%s:</strong> Posts are reordered in background, please wait..."
+#~ msgstr ""
+#~ "<strong>%s:</strong> Các bài viết đang được sắp xếp ngầm, xin vui lòng "
+#~ "đợi..."
+
+#, php-format
+#~ msgid "<strong>%1$s:</strong> %2$s posts grouped successfully."
+#~ msgstr "<strong>%1$s:</strong> %2$s bài viết đã gom nhóm thành công."
+
+#, php-format
+#~ msgid "<strong>%1$s:</strong> %2$s posts ungrouped successfully."
+#~ msgstr "<strong>%1$s:</strong> %2$s bài viết đã hủy nhóm thành công."
+
+#~ msgid "Display list child posts of current connector in post screen."
+#~ msgstr "Hiển thị danh sách con của kết nối hiện tại trên màn hình bài viết."
+
+#~ msgid "Category Per Page"
+#~ msgstr "Chuyên mục mỗi trang"
+
+#~ msgid ""
+#~ "<span class=\"glyphicon glyphicon-chevron-left\"></span> Previous <span "
+#~ "class=\"hidden-xs\">chapter</span>"
+#~ msgstr ""
+#~ "<span class=\"glyphicon glyphicon-chevron-left\"></span> <span class="
+#~ "\"hidden-xs\">Chương</span> trước"
+
+#~ msgid "Choose chapter"
+#~ msgstr "Chọn tập"
+
+#~ msgid ""
+#~ "Next <span class=\"hidden-xs\">chapter</span> <span class=\"glyphicon "
+#~ "glyphicon-chevron-right\"></span>"
+#~ msgstr ""
+#~ "<span class=\"hidden-xs\">Chương</span> tiếp <span class=\"glyphicon "
+#~ "glyphicon-chevron-right\"></span>"
+
+#~ msgid "Connector Groups"
+#~ msgstr "Nhóm kết nối"
+
+#~ msgid "Connector Group"
+#~ msgstr "Nhóm kết nối"
+
+#~ msgid "Checking queue..."
+#~ msgstr "Đang kiểm tra hàng đợi..."
+
+#~ msgid "Empty relations queue!"
+#~ msgstr "Hàng đợi các liên kết rỗng!"
+
+#~ msgid "Queue is running..."
+#~ msgstr "Đang thực thi hàng đợi..."
+
+#~ msgid "Posts Per Page"
+#~ msgstr "Bài viết mỗi trang"
+
+#~ msgid "Display Connector Childs"
+#~ msgstr "Hiển thị kết nối con"
+
+#, php-format
+#~ msgid "%1$s posts have been updated! Number of articles remaining: %2$s."
+#~ msgstr "%1$s bài viết đã được cập nhật! Số bài viết còn lại: %2$s."
+
+#~ msgid "List Parent Posts"
+#~ msgstr "Danh sách bài viết cha"
+
+#~ msgid "You can choose one or many post parents."
+#~ msgstr "Bạn có thể chọn một hoặc nhiều bài viết cha."
+
+#~ msgid "There are currently no post connector."
+#~ msgstr "Hiện không có bài viết kết nối nào."
+
+#~ msgid "List Child Posts"
+#~ msgstr "Danh sách bài viết con"
+
+#~ msgid "You can choose child posts to display for parent post."
+#~ msgstr "Bạn có thể chọn bài viết con để hiển thị cho bài viết cha."
+
+#, php-format
+#~ msgid ""
+#~ "<strong>Post Connector Mod</strong>: You must install and activate plugin "
+#~ "<a href=\"%s\">Post Connector</a> for plugin works normally."
+#~ msgstr ""
+#~ "<strong>Post Connector Mod</strong>: Bạn phải cài đặt và kích hoạt plugin "
+#~ "<a href=\"%s\">Post Connector</a> để plugin hoạt động bình thường."
+
+#~ msgid "Photos"
+#~ msgstr "Photo"
+
+#~ msgid "Illustrations"
+#~ msgstr "Illustration"
+
+#~ msgid "Vectors"
+#~ msgstr "Vector"
+
+#~ msgid "Free Vectors"
+#~ msgstr "Vector miễn phí"
+
+#, php-format
+#~ msgid "Search Results for \"%s\""
+#~ msgstr "Kết quả tìm kiếm cho \"%s\""
+
+#~ msgid "Hundreds of millions of high quality stock vector images"
+#~ msgstr "Hàng trăm triệu ảnh stock vector chất lượng cao"
+
+#~ msgid ""
+#~ "Download high quality stock images, vector images, designs in just 5 "
+#~ "seconds"
+#~ msgstr ""
+#~ "Download ảnh stock, ảnh vector, ảnh thiết kế đa dạng chất lượng cao chỉ "
+#~ "trong 5 giây"
+
+#~ msgid "Enter your search term here and enter..."
+#~ msgstr "Nhập từ khóa tìm kiếm của bạn và nhấn enter..."
+
+#~ msgid "No results found!"
+#~ msgstr "Không có kết quả nào được tìm thấy!"
+
+#~ msgid "Next page"
+#~ msgstr "Trang tiếp"
+
+#~ msgid "Shutterstock Consumer Key"
+#~ msgstr "Shutterstock Consumer Key"
+
+#~ msgid "Shutterstock Consumer Secret"
+#~ msgstr "Shutterstock Consumer Secret"
+
+#~ msgid "Google API Key"
+#~ msgstr "Mã Google API"
+
+#~ msgid "Header Selector"
+#~ msgstr "Bộ chọn đầu trang"
+
+#~ msgid "Search Box Background"
+#~ msgstr "Hình nền box tìm kiếm"
+
+#~ msgid "Heading"
+#~ msgstr "Tiêu đề"
+
+#~ msgid "Sub Heading"
+#~ msgstr "Tiêu đề phụ"
+
+#~ msgid "Cache Hour"
+#~ msgstr "Giờ lưu cache"
+
+#~ msgid "Number of hours to store search results in the database."
+#~ msgstr "Số giờ để lưu kết quả tìm kiếm trong cơ sở dữ liệu."
+
+#~ msgid "Load More AJAX"
+#~ msgstr "Tải thêm AJAX"
+
+#~ msgid "Check here if you want to use load more AJAX instead of new page."
+#~ msgstr ""
+#~ "Chọn vào đây nếu bạn muốn sử dụng tải thêm AJAX thay vì chuyển sang trang "
+#~ "mới."
+
+#~ msgid "Stop searching with these words. Each word or sentence on one line."
+#~ msgstr "Ngừng tìm kiếm với những từ này. Mỗi từ hoặc câu nằm trên một dòng."
+
+#~ msgid "Blocked Words"
+#~ msgstr "Từ bị chặn"
+
+#~ msgid ""
+#~ "If you want to use advanced check for blocked words, just input number of "
+#~ "character length for checking word in sentences. Example: If you enter "
+#~ "the number 3, then when a user searches for \"sexy\", it will be blocked "
+#~ "if you set the word \"sex\" in the <strong>blocked word</strong> section "
+#~ "above."
+#~ msgstr ""
+#~ "Nếu bạn muốn sử dụng chức năng chặn từ nâng cao, bạn chỉ việc nhập số "
+#~ "chiều dài ký tự để kiểm tra từ trong câu. Ví dụ: Nếu bạn nhập số 3, khi "
+#~ "người dùng tìm kiếm từ khóa \"sexy\", nó sẽ bị chặn nếu bạn có thiết lập "
+#~ "từ \"sex\" ở trong mục cài đặt <strong>Từ bị chặn</strong> bên trên."
+
+#~ msgid "Hard Check Blocked Words"
+#~ msgstr "Kiểm tra chặn từ cứng"
+
+#~ msgid "This post doesn't have post thumbnail."
+#~ msgstr "Bài viết này không có ảnh đại diện."
+
+#~ msgid "Can't download image."
+#~ msgstr "Không thể tải hình ảnh."
+
+#~ msgid "Invalid post."
+#~ msgstr "Bài viết không đúng."
+
+#~ msgid "Use this image"
+#~ msgstr "Sử dụng hình ảnh này"
+
+#~ msgid "Image Watermark"
+#~ msgstr "Chữ ký ảnh"
+
+#~ msgid "Upload image"
+#~ msgstr "Tải ảnh lên"
+
+#~ msgid "Use current post thumbnail"
+#~ msgstr "Sử dụng ảnh đại diện hiện tại của bài viết"
+
+#~ msgid "Click on image to change it."
+#~ msgstr "Nhấn vào hình ảnh để thay đổi nó."
+
+#~ msgid "Watermark Image"
+#~ msgstr "Chữ ký ảnh"
+
+#~ msgid "Watermark Size"
+#~ msgstr "Kích thước chữ ký ảnh"
+
+#~ msgid "Watermark stretches to fit image width."
+#~ msgstr "Căng giãn chữ ký ảnh cho phù hợp với độ rộng hình ảnh."
+
+#~ msgid "Stretch Watermark"
+#~ msgstr "Làm căng chữ ký ảnh"
+
+#~ msgid "Top left corner"
+#~ msgstr "Góc trên bên trái"
+
+#~ msgid "Top right corner"
+#~ msgstr "Góc trên bên phải"
+
+#~ msgid "Bottom right corner"
+#~ msgstr "Góc dưới bên phải"
+
+#~ msgid "Bottom left corner"
+#~ msgstr "Góc dưới bên trái"
+
+#~ msgid "-- Choose position --"
+#~ msgstr "-- Chọn vị trí --"
+
+#~ msgid "Watermark Position"
+#~ msgstr "Vị trí chữ ký ảnh"
+
+#~ msgid "Adjust the image width to match the watermark."
+#~ msgstr "Điều chỉnh độ rộng hình ảnh khớp với chữ ký ảnh."
+
+#~ msgid "Fixed Image Width"
+#~ msgstr "Thay đổi độ rộng hình ảnh"
+
+#~ msgid "Auto find image and add watermark."
+#~ msgstr "Tự động tìm hỉnh ảnh và thêm chữ ký ảnh."
+
+#~ msgid "FAQ Rich Result"
+#~ msgstr "FAQ Rich Result"
+
+#, php-format
+#~ msgid ""
+#~ "Each questions and answers are on new line. Separate answer and question "
+#~ "with <code>%s</code>, separate each pair question and answer with <code>"
+#~ "%s</code>."
+#~ msgstr ""
+#~ "Mỗi câu hỏi và câu trả lời nằm trên một dòng. Phân cách câu trả lời và "
+#~ "câu hỏi với <code>%s</code>, phân cách mỗi cặp câu hỏi và câu trả lời với "
+#~ "<code>%s</code>."
+
+#, php-format
+#~ msgid "FAQ's for %s"
+#~ msgstr "FAQs cho %s"
+
+#~ msgid "Related posts"
+#~ msgstr "Bài viết liên quan"
+
+#, php-format
+#~ msgid "<p>View detail: %s</p>"
+#~ msgstr "<p>Xem chi tiết: %s</p>"
+
+#~ msgid ""
+#~ "Enter the name of the taxonomy that allows the use of the FAQ Rich "
+#~ "Result. Each taxonomy name separated by commas."
+#~ msgstr ""
+#~ "Nhập tên kiểu chuyên mục được phép sử dụng tính năng FAQ Rich Result. Mỗi "
+#~ "thể loại chuyên mục được cách nhau bởi dấu phẩy."
+
+#~ msgid "Term Supports"
+#~ msgstr "Hỗ trợ chuyên mục"
+
+#~ msgid ""
+#~ "Enter the name of the post type that allows the use of the FAQ Rich "
+#~ "Result. Each post type name separated by commas."
+#~ msgstr ""
+#~ "Nhập tên kiểu bài viết được phép sử dụng tính năng FAQ Rich Result. Mỗi "
+#~ "thể loại bài viết được cách nhau bởi dấu phẩy."
+
+#~ msgid "Post Supports"
+#~ msgstr "Hỗ trợ bài viết"
+
+#~ msgid "Number Questions"
+#~ msgstr "Số câu hỏi"
+
+#~ msgid "Previous"
+#~ msgstr "Trước"
+
+#~ msgid "Hotline"
+#~ msgstr "Hotline"
+
+#~ msgid "Main Slider"
+#~ msgstr "Slider chính"
+
+#~ msgid "Slider Pause Time (milliseconds)"
+#~ msgstr "Thời gian ngừng slide (mili giây)"
+
+#~ msgid "Subscribe Box"
+#~ msgstr "Mục đăng ký nhận tin"
+
+#~ msgid "Home Page"
+#~ msgstr "Trang chủ"
+
+#~ msgid "Display related posts box on single page?"
+#~ msgstr "Hiển thị mục bài viết liên quan trên trang xem bài viết?"
+
+#, php-format
+#~ msgid "News & progress of %s projects"
+#~ msgstr "Tin tức & Tiến độ dự án %s"
+
+#~ msgid "Source domain"
+#~ msgstr "Tên miền nguồn"
+
+#~ msgid "The number of posts will be fetched on each process."
+#~ msgstr "Số bài viết sẽ được lấy cho mỗi lần chạy."
+
+#~ msgid "Posts Number"
+#~ msgstr "Số bài viết"
+
+#~ msgid ""
+#~ "Interval in seconds allows the web page to automatically reload when the "
+#~ "user is inactive."
+#~ msgstr ""
+#~ "Khoảng thời gian bằng giây để trang web tự động tải lại trang khi người "
+#~ "dùng không hoạt động."
+
+#~ msgid "Reload Interval"
+#~ msgstr "Khoảng thời gian tải lại trang"
+
+#~ msgid "Time interval in seconds for the site to automatically fetch posts."
+#~ msgstr "Khoảng thời gian bằng giây để trang web tự động lấy bài viết."
+
+#~ msgid "Fetch Posts Interval"
+#~ msgstr "Khoảng thời gian lấy bài viết"
+
+#~ msgid "The default post status for new post."
+#~ msgstr "Trạng thái mặc định cho bài viết mới."
+
+#~ msgid "Default Post Status"
+#~ msgstr "Trạng thái bài viết mặc định"
+
+#~ msgid "The default category for posts which auto fetched."
+#~ msgstr "Chuyên mục mặc định cho các bài viết được lấy tự động."
+
+#~ msgid "Default Category"
+#~ msgstr "Chuyên mục mặc định"
+
+#~ msgid "Prepend text or custom HTML to before post content."
+#~ msgstr "Thêm văn bản hoặc HTML tùy chỉnh vào trước nội dung bài viết."
+
+#~ msgid "Add Before Content"
+#~ msgstr "Thêm vào trước nội dung"
+
+#~ msgid "AJAX Load More"
+#~ msgstr "Tải thêm AJAX"
+
+#~ msgid "No more posts"
+#~ msgstr "Không còn bài viết"
+
+#~ msgid ""
+#~ "Add body class you want to skip load more button. Each class separate by "
+#~ "commas."
+#~ msgstr ""
+#~ "Thêm thuộc tính class của thẻ body mà bạn muốn bỏ qua nút tải thêm. Mỗi "
+#~ "class cách nhau bởi dấu phẩy."
+
+#~ msgid "Skip Body Class"
+#~ msgstr "Bỏ qua body class"
+
+#~ msgid "Auto Load Offset"
+#~ msgstr "Tự động tải offset"
 
 #~ msgid "User ID"
 #~ msgstr "ID người dùng"
@@ -150,9 +800,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Contact for price"
 #~ msgstr "Giá liên hệ"
 
-#~ msgid "Post Number"
-#~ msgstr "Số bài viết"
-
 #~ msgid "Post Column"
 #~ msgstr "Số cột bài viết"
 
@@ -161,9 +808,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Each post type separated by commas."
 #~ msgstr "Mỗi thể loại bài viết được cách nhau bởi dấu phẩy."
-
-#~ msgid "Post Type"
-#~ msgstr "Loại bài viết"
 
 #~ msgid "Like"
 #~ msgstr "Thích"
@@ -234,9 +878,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Title:"
 #~ msgstr "Tiêu đề:"
 
-#~ msgid "Time Interval:"
-#~ msgstr "Khoảng thời gian:"
-
 #~ msgid "Sub Video Title Length:"
 #~ msgstr "Độ dài tiêu đề video phụ:"
 
@@ -273,9 +914,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Score"
 #~ msgstr "Điểm"
 
-#~ msgid "Views"
-#~ msgstr "Lượt xem"
-
 #~ msgid "Thumbnail"
 #~ msgstr "Ảnh đại diện"
 
@@ -287,9 +925,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Ended"
 #~ msgstr "Đã kết thúc"
-
-#~ msgid "No videos found!"
-#~ msgstr "Không có video nào được tìm thấy!"
 
 #~ msgid "This contest is ended!"
 #~ msgstr "Cuộc thi này đã kết thúc!"
@@ -303,9 +938,6 @@ msgstr "Tự động tải offset"
 #~ msgid "The video already exists!"
 #~ msgstr "Video này đã tồn tại!"
 
-#~ msgid "Invalid start date."
-#~ msgstr "Ngày bắt đầu không đúng."
-
 #~ msgid "Invalid end date."
 #~ msgstr "Ngày kết thúc không đúng."
 
@@ -318,9 +950,6 @@ msgstr "Tự động tải offset"
 #~ msgid "You can input YouTube video ID or URL."
 #~ msgstr "Bạn có thể nhập ID hoặc đường dẫn của video trên YouTube."
 
-#~ msgid "Award Name:"
-#~ msgstr "Tên giải thưởng:"
-
 #~ msgid "Start Date:"
 #~ msgstr "Ngày bắt đầu:"
 
@@ -329,9 +958,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Max Video Number:"
 #~ msgstr "Số lượng video tối đa:"
-
-#~ msgid "Ending Condition:"
-#~ msgstr "Điều kiện kết thúc:"
 
 #~ msgid "Date"
 #~ msgstr "Ngày"
@@ -351,9 +977,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Add New"
 #~ msgstr "Thêm mới"
 
-#~ msgid "Add New Contest"
-#~ msgstr "Thêm cuộc thi mới"
-
 #~ msgid "Contest Attributes"
 #~ msgstr "Thuộc tính cuộc thi"
 
@@ -369,17 +992,8 @@ msgstr "Tự động tải offset"
 #~ msgid "View Contests"
 #~ msgstr "Xem cuộc thi"
 
-#~ msgid "Search Contests"
-#~ msgstr "Tìm kiếm cuộc thi"
-
-#~ msgid "No contests found"
-#~ msgstr "Không có cuộc thi nào được tìm thấy"
-
 #~ msgid "No contests found in Trash"
 #~ msgstr "Không có cuộc thi nào được tìm thấy trong thùng rác"
-
-#~ msgid "Parent Contest:"
-#~ msgstr "Cuộc thi cha:"
 
 #~ msgid "All Contests"
 #~ msgstr "Tất cả cuộc thi"
@@ -432,9 +1046,6 @@ msgstr "Tự động tải offset"
 #~ msgid "View Video"
 #~ msgstr "Xem video"
 
-#~ msgid "View Videos"
-#~ msgstr "Xem video"
-
 #~ msgid "Search Videos"
 #~ msgstr "Tìm kiếm video"
 
@@ -443,9 +1054,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "No videos found in Trash"
 #~ msgstr "Không có video nào được tìm thấy trong thùng rác"
-
-#~ msgid "All Videos"
-#~ msgstr "Tất cả video"
 
 #~ msgid "Video Archives"
 #~ msgstr "Lưu trữ video"
@@ -506,20 +1114,11 @@ msgstr "Tự động tải offset"
 #~ "Video của bạn đã được thêm thành công! Chúng tôi sẽ xét duyệt và sớm đăng "
 #~ "video của bạn."
 
-#~ msgid "There was an error occurred, please try again."
-#~ msgstr "Đã có lỗi xảy ra, xin vui lòng thử lại."
-
 #~ msgid "Join Contest \"%s\""
 #~ msgstr "Tham gia cuộc thi \"%s\""
 
-#~ msgid "Description:"
-#~ msgstr "Mô tả:"
-
 #~ msgid "Video description."
 #~ msgstr "Mô tả video."
-
-#~ msgid "Submit"
-#~ msgstr "Hoàn tất"
 
 #~ msgid "Close"
 #~ msgstr "Đóng"
@@ -555,9 +1154,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Disconnect %s"
 #~ msgstr "Ngắt kết nối %s"
 
-#~ msgid "Connect"
-#~ msgstr "Kết nối"
-
 #~ msgid "Facebook Account"
 #~ msgstr "Tài khoản Facebook"
 
@@ -566,12 +1162,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Please correct captcha code."
 #~ msgstr "Xin vui lòng nhập đúng mã bảo mật."
-
-#~ msgid "You have been logged in successfully."
-#~ msgstr "Bạn đã được đăng nhập thành công."
-
-#~ msgid "Button Selector"
-#~ msgstr "Chọn nút"
 
 #~ msgid "reCAPTCHA Site Key"
 #~ msgstr "reCAPTCHA Site Key"
@@ -584,9 +1174,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Username or email address"
 #~ msgstr "Tên tài khoản hoặc địa chỉ email"
-
-#~ msgid "Password"
-#~ msgstr "Mật khẩu"
 
 #~ msgid "Login"
 #~ msgstr "Đăng nhập"
@@ -616,9 +1203,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Change category for post"
 #~ msgstr "Thay đổi chuyên mục cho bài viết"
 
-#~ msgid "Choose category"
-#~ msgstr "Chọn chuyên mục"
-
 #~ msgid "Ok"
 #~ msgstr "Đồng ý"
 
@@ -644,9 +1228,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "REST API Sites"
 #~ msgstr "Trang dùng REST API"
-
-#~ msgid "Questions"
-#~ msgstr "Câu hỏi"
 
 #~ msgid "Do Count"
 #~ msgstr "Số lượt làm"
@@ -702,12 +1283,6 @@ msgstr "Tự động tải offset"
 #~ msgid "The test is loading..."
 #~ msgstr "Nội dung bài kiểm tra đang được tải..."
 
-#~ msgid "Previous"
-#~ msgstr "Trước"
-
-#~ msgid "Next"
-#~ msgstr "Tiếp"
-
 #~ msgid "Finish"
 #~ msgstr "Kết thúc"
 
@@ -744,9 +1319,6 @@ msgstr "Tự động tải offset"
 #~ msgid "You can set the fields which get value from taxonomy."
 #~ msgstr "Bạn có thể thiết lập các mục mà bạn muốn lấy dữ liệu từ taxonomy."
 
-#~ msgid "Questions Per Page"
-#~ msgstr "Câu hỏi mỗi trang"
-
 #~ msgid "Numbers"
 #~ msgstr "Số lượng"
 
@@ -778,9 +1350,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Random Answer"
 #~ msgstr "Câu trả lời ngẫu nhiên"
-
-#~ msgid "Are you sure you want to delete this item?"
-#~ msgstr "Bạn có chắc là bạn muốn xóa hay không?"
 
 #~ msgid "Please fill random number questions or search single question title."
 #~ msgstr ""
@@ -831,32 +1400,17 @@ msgstr "Tự động tải offset"
 #~ msgid "Single questions:"
 #~ msgstr "Từng câu hỏi một:"
 
-#~ msgid "Upload image"
-#~ msgstr "Tải ảnh lên"
-
-#~ msgid "Remove image"
-#~ msgstr "Xóa ảnh"
-
 #~ msgid "Answer text"
 #~ msgstr "Câu trả lời bằng văn bản"
 
 #~ msgid "Correct answer"
 #~ msgstr "Câu trả lời đúng"
 
-#~ msgid "Remove answer"
-#~ msgstr "Xóa câu trả lời"
-
 #~ msgid "Text answers"
 #~ msgstr "Câu trả lời bằng văn bản"
 
-#~ msgid "Image answers"
-#~ msgstr "Câu trả lời bằng hình ảnh"
-
 #~ msgid "+ Add Answer"
 #~ msgstr "+ Thêm câu trả lời"
-
-#~ msgid "Are you sure you want to finish this test?"
-#~ msgstr "Bạn có chắc là bạn muốn kết thúc bài kiểm tra này?"
 
 #~ msgid ""
 #~ "The title for post information box on frontend. Use tag <code>%post_title"
@@ -868,14 +1422,8 @@ msgstr "Tự động tải offset"
 #~ msgid "Do not add summary box to post content"
 #~ msgstr "Không thêm thông tin mở rộng vào bào viết"
 
-#~ msgid "Before post content"
-#~ msgstr "Trên nội dung bài viết"
-
 #~ msgid "After post content"
 #~ msgstr "Dưới nội dung bài viết"
-
-#~ msgid "Box Position"
-#~ msgstr "Vị trí"
 
 #~ msgid "Meta Fields"
 #~ msgstr "Các trường mở rộng"
@@ -906,9 +1454,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Thousands Separator"
 #~ msgstr "Phân cách hàng ngàn"
-
-#~ msgid "Car Price Page"
-#~ msgstr "Trang giá xe"
 
 #~ msgid "Car Price Compare Page"
 #~ msgstr "Trang so sánh giá xe"
@@ -1069,9 +1614,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Each poll option in new line."
 #~ msgstr "Mỗi bình chọn nằm trên một dòng."
 
-#~ msgid "Number of poll options to show on each post."
-#~ msgstr "Số lượng bình chọn hiển thị trên mỗi bài viết."
-
 #~ msgid "Sign up with your Google account"
 #~ msgstr "Đăng ký bằng tài khoản Google"
 
@@ -1116,14 +1658,8 @@ msgstr "Tự động tải offset"
 #~ msgid "Custom Style"
 #~ msgstr "Tùy chỉnh giao diện"
 
-#~ msgid "Login Page"
-#~ msgstr "Trang đăng nhập"
-
 #~ msgid "Lost Password Page"
 #~ msgstr "Trang quên mật khẩu"
-
-#~ msgid "Saved Posts Page"
-#~ msgstr "Trang bài viết đã lưu"
 
 #~ msgid "Login Logo"
 #~ msgstr "Logo trang đăng nhập"
@@ -1361,9 +1897,6 @@ msgstr "Tự động tải offset"
 #~ "Hệ thống sẽ chuyển tiếp người dùng sang đường dẫn này sau khi bài viết đã "
 #~ "được đăng."
 
-#~ msgid "You can only upload %s media file per day."
-#~ msgstr "Bạn có thể tải lên %s tập tin đa phương tiện mỗi ngày."
-
 #~ msgid ""
 #~ "Your post has been added successfully. You can <a href=\"%s\">click here</"
 #~ "a> to update it."
@@ -1403,9 +1936,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Expiry date:"
 #~ msgstr "Ngày hết hạn:"
 
-#~ msgid "Image:"
-#~ msgstr "Hình ảnh:"
-
 #~ msgid "Url:"
 #~ msgstr "Đường dẫn:"
 
@@ -1432,9 +1962,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Suffix:"
 #~ msgstr "Hậu tố:"
-
-#~ msgid "Post parent"
-#~ msgstr "Bài viết cha"
 
 #~ msgid "View &#8220;%s&#8221;"
 #~ msgstr "Xem &#8220;%s&#8221;"
@@ -1565,13 +2092,7 @@ msgstr "Tự động tải offset"
 #~ msgid "News Categories"
 #~ msgstr "Chuyên mục tin tức"
 
-#~ msgid "News Category"
-#~ msgstr "Chuyên mục tin tức"
-
 #~ msgid "News Tags"
-#~ msgstr "Thẻ tin tức"
-
-#~ msgid "News Tag"
 #~ msgstr "Thẻ tin tức"
 
 #~ msgid "Agreed price"
@@ -1613,9 +2134,6 @@ msgstr "Tự động tải offset"
 #~ msgid "Only Single"
 #~ msgstr "Chỉ trang xem bài viết"
 
-#~ msgid "Default Latitude"
-#~ msgstr "Vĩ độ mặc định"
-
 #~ msgid "Default Longitude"
 #~ msgstr "Kinh độ mặc định"
 
@@ -1627,9 +2145,6 @@ msgstr "Tự động tải offset"
 
 #~ msgid "Streamango streaming API settings."
 #~ msgstr "Cài đặt Streamango API."
-
-#~ msgid "Streamcherry"
-#~ msgstr "Streamcherry"
 
 #~ msgid "Streamcherry streaming API settings."
 #~ msgstr "Cài đặt Streamcherry API."
@@ -1646,14 +2161,8 @@ msgstr "Tự động tải offset"
 #~ msgid "Link not valid"
 #~ msgstr "Đường dẫn không đúng"
 
-#~ msgid "Cannot get download ticket!"
-#~ msgstr "Không thể lấy download ticket!"
-
 #~ msgid "JW Player extension not loaded!"
 #~ msgstr "Gói mở rộng JW Player không được tải!"
-
-#~ msgid "Featured Image"
-#~ msgstr "Ảnh đại diện"
 
 #~ msgid "Media Player"
 #~ msgstr "Trình phát video"
@@ -1669,9 +2178,6 @@ msgstr "Tự động tải offset"
 #~ "Cung cấp thông tin cho trình phát video hoạt động. JW Player là trình "
 #~ "phát video mạnh mẽ và linh hoạt được hỗ trợ trên nền tảng nhanh nhất, đây "
 #~ "trình phát video HTML5 được sử dụng nhiều nhất."
-
-#~ msgid "Background"
-#~ msgstr "Hình nền"
 
 #~ msgid "Using JW Player as your main player?"
 #~ msgstr "Sử dụng JW Player làm trình phát chính?"

@@ -1,15 +1,17 @@
 <?php
 /**
- * Plugin Name: Auto Fetch Post
+ * Plugin Name: WooCommerce Checkout Images
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
  * Used For: example.com
- * Last Updated: 08/10/2019
+ * Last Updated: 22/06/2022
  * Coder: laidinhcuongvn@gmail.com
  * Version: 1.0.0
+ * Requires at least: 5.9
+ * Requires PHP: 7.4
  * Author URI: http://facebook.com/hocwpnet/
- * Text Domain: auto-fetch-post
+ * Text Domain: woo-checkout-images
  * Domain Path: /languages/
  */
 
@@ -17,20 +19,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// Load core functions
 require_once dirname( __FILE__ ) . '/core/core.php';
 
-class Auto_Fetch_Post extends Auto_Fetch_Post_Core {
-	// Default plugin variable
+class Woo_Checkout_Images extends Woo_Checkout_Images_Core {
+	// Default plugin variable: Plugin single instance.
 	protected static $instance;
 
-	// Default plugin variable
+	// Default plugin variable: Plugin file path.
 	protected $plugin_file = __FILE__;
 
-	// Default plugin variable
-	public $option_defaults = array();
-
 	/*
-	 * Default plugin function
+	 * Default plugin function: Check single instance.
 	 */
 	public static function get_instance() {
 		if ( ! ( self::$instance instanceof self ) ) {
@@ -41,62 +41,85 @@ class Auto_Fetch_Post extends Auto_Fetch_Post_Core {
 	}
 
 	/*
-	 * Default plugin function
+	 * Default plugin function: Plugin construct.
 	 */
 	public function __construct() {
 		parent::__construct();
 
-		if ( self::$instance instanceof self ) {
-			return;
+		add_action( 'plugins_loaded', array( $this, 'run_init_action' ), 11 );
+
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 999 );
+
+		add_filter( 'hocwp_theme_backup_wp_content_folders', array( $this, 'add_folder_for_auto_backup' ) );
+		add_filter( 'paginate_links', array( $this, 'paginate_links_filter' ) );
+
+		$on = $this->get_option_name();
+
+		if ( empty( $on ) ) {
+			parent::re_init();
 		}
 
-		if ( is_admin() ) {
-			add_action( 'admin_init', array( $this, 'custom_admin_init_action' ) );
-		} else {
-			add_action( 'wp_enqueue_scripts', array( $this, 'custom_wp_enqueue_scripts_action' ) );
+		add_action( 'init', array( $this, 'init_action' ) );
+
+		add_filter( 'wp_check_filetype_and_ext', array( $this, 'wp_check_filetype_and_ext_filter' ), 10, 2 );
+		add_filter( 'file_is_displayable_image', array( $this, 'file_is_displayable_image_filter' ), 10, 2 );
+		add_filter( 'wp_get_attachment_metadata', array( $this, 'wp_get_attachment_metadata_filter' ), 10, 2 );
+		add_filter( 'upload_mimes', array( $this, 'upload_mimes_filter' ) );
+
+		// Default load action
+		add_action( 'after_setup_theme', array( $this, 'load' ) );
+	}
+
+	public function paginate_links_filter( $link ) {
+		$link  = str_replace( '#038;', '&', $link );
+		$parts = parse_url( $link );
+
+		if ( isset( $parts['query'] ) ) {
+			parse_str( $parts['query'], $params );
+
+			if ( $this->array_has_value( $params ) ) {
+				$link = add_query_arg( $params, $link );
+			}
 		}
+
+		$link = remove_query_arg( 'wp_http_referer', $link );
+
+		return $link;
 	}
 
 	/*
-	 * Default plugin function
+	 * Default plugin function: Load plugin environment.
 	 */
-	public function custom_wp_enqueue_scripts_action() {
+	public function load() {
+		if ( method_exists( $this, 'custom_global_scripts_action' ) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'custom_global_scripts_action' ) );
+			add_action( 'login_enqueue_scripts', array( $this, 'custom_global_scripts_action' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'custom_global_scripts_action' ) );
+		}
 
+		if ( method_exists( $this, 'custom_load' ) ) {
+			$this->custom_load();
+		}
 	}
 
-	public function load_more_button() {
-		ob_start();
-		?>
-		<button type="button"
-		        class="bnt-blue load-more-button real-btn"
-		        data-text="<?php echo esc_attr( __( 'Load more', $this->textdomain ) ); ?>"
-		        data-loading-text="<?php echo esc_attr( __( 'Loading more', $this->textdomain ) ); ?>"><?php _e( 'Load more', $this->textdomain ); ?></button>
-		<?php
-		return ob_get_clean();
-	}
+	// Custom functions should be declared below this line.
 
-	/*
-	 * Default plugin function
-	 */
-	public function custom_admin_init_action() {
-		$args = array(
-			'description' => __( 'Add body class you want to skip load more button. Each class separate by commas.', $this->textdomain )
-		);
+	// Default plugin variable: Plugin default options.
+	public $option_defaults = array(
+		'max_image_size'     => '',
+		'max_image_count'    => 5,
+		'upload_description' => ''
+	);
 
-		$this->add_settings_field( 'skip_class', __( 'Skip Body Class', $this->textdomain ), 'admin_setting_field_textarea', 'default', $args );
-
-		$args = array(
-			'type' => 'number'
-		);
-
-		$this->add_settings_field( 'auto_load_offset', __( 'Auto Load Offset', $this->textdomain ), 'admin_setting_field_input', 'default', $args );
-	}
+	public $content_dir = true;
 }
 
-function Auto_Fetch_Post() {
-	return Auto_Fetch_Post::get_instance();
+function Woo_Checkout_Images() {
+	return Woo_Checkout_Images::get_instance();
 }
 
 add_action( 'plugins_loaded', function () {
-	Auto_Fetch_Post();
+	if ( defined( 'WC_PLUGIN_FILE' ) ) {
+		require_once dirname( __FILE__ ) . '/custom/load.php';
+	}
 } );
