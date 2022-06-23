@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Woo_Checkout_Images_Post_Columns {
+class Share_Fonts_Post_Columns {
 	public function __construct() {
 		add_filter( 'manage_posts_columns', array( $this, 'manage_posts_columns_filter' ), 10, 2 );
 		add_action( 'manage_posts_custom_column', array( $this, 'manage_posts_custom_column_action' ), 10, 2 );
@@ -18,4 +18,4 @@ class Woo_Checkout_Images_Post_Columns {
 	}
 }
 
-new Woo_Checkout_Images_Post_Columns();
+new Share_Fonts_Post_Columns();

@@ -11,7 +11,7 @@
  * @abstract
  * @extends WP_Async_Request
  */
-abstract class Woo_Checkout_Images_Background_Process extends Woo_Checkout_Images_Async_Request {
+abstract class Share_Fonts_Background_Process extends Share_Fonts_Async_Request {
 
 	/**
 	 * Action

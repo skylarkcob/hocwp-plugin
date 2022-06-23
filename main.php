@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WooCommerce Checkout Images
+ * Plugin Name: Share Fonts
  * Plugin URI: http://hocwp.net/project/
  * Description: This plugin is created by HocWP Team.
  * Author: HocWP Team
@@ -11,7 +11,7 @@
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author URI: http://facebook.com/hocwpnet/
- * Text Domain: woo-checkout-images
+ * Text Domain: share-fonts
  * Domain Path: /languages/
  */
 
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Load core functions
 require_once dirname( __FILE__ ) . '/core/core.php';
 
-class Woo_Checkout_Images extends Woo_Checkout_Images_Core {
+class Share_Fonts extends Share_Fonts_Core {
 	// Default plugin variable: Plugin single instance.
 	protected static $instance;
 
@@ -106,16 +106,13 @@ class Woo_Checkout_Images extends Woo_Checkout_Images_Core {
 
 	// Default plugin variable: Plugin default options.
 	public $option_defaults = array(
-		'max_image_size'     => '',
-		'max_image_count'    => 5,
-		'upload_description' => ''
 	);
 
 	public $content_dir = true;
 }
 
-function Woo_Checkout_Images() {
-	return Woo_Checkout_Images::get_instance();
+function Share_Fonts() {
+	return Share_Fonts::get_instance();
 }
 
 add_action( 'plugins_loaded', function () {

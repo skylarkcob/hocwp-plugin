@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SB Core\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
-"POT-Creation-Date: 2021-11-11 10:54+0700\n"
-"PO-Revision-Date: 2021-11-11 10:55+0700\n"
+"POT-Creation-Date: 2022-06-23 10:43+0700\n"
+"PO-Revision-Date: 2022-06-23 10:43+0700\n"
 "Last-Translator: \n"
 "Language-Team: HocWP Team - hocwp.net@gmail.com - www.hocwp.net\n"
 "Language: vi\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.1\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -131,95 +131,77 @@ msgstr ""
 msgid "Every %d Minutes"
 msgstr "Mỗi %d phút"
 
-#: custom/inc/class-plugin-admin.php:109
-msgid "Shop order"
-msgstr "Đơn hàng"
-
-#: custom/inc/class-plugin-admin.php:121
-msgid "View customer product images"
-msgstr "Xem ảnh size của khách hàng"
-
-#: custom/inc/class-plugin-admin.php:122
-msgid "View"
-msgstr "Xem"
-
-#: custom/inc/class-plugin-admin.php:130
-msgid "View images"
-msgstr "Xem hình ảnh"
-
-#: custom/inc/class-plugin-admin.php:170
-msgid "Filter by order"
-msgstr "Lọc theo đơn hàng"
-
-#: custom/inc/class-plugin-admin.php:173
-msgid "-- Choose shop order --"
-msgstr "-- Chọn đơn hàng --"
-
-#: custom/inc/class-plugin-admin.php:175
-msgid "All orders"
-msgstr "Tất cả đơn hàng"
-
-#: custom/inc/class-plugin-admin.php:232
-msgid "Customer Product Sizes"
-msgstr "Ảnh size của khách hàng"
-
-#: custom/inc/class-plugin-admin.php:268
-msgid "No images found!"
-msgstr "Không có hình ảnh nào được tìm thấy!"
-
-#: custom/inc/class-plugin-admin.php:274
+#: custom/inc/class-plugin-admin.php:111
 msgid "There was an error caused, please try again."
 msgstr "Đã có lỗi xảy ra, xin vui lòng thử lại."
 
-#: custom/inc/class-plugin-admin.php:348
-msgid "The max number of images user can upload."
-msgstr "Số lượng hình ảnh tối đa cho phép người dùng tải lên."
-
-#: custom/inc/class-plugin-admin.php:352
-msgid "Max Image Count"
-msgstr "Số lượng hình ảnh tối đa"
-
-#: custom/inc/class-plugin-admin.php:354
-#, php-format
-msgid ""
-"The max image size (KB). The default size (%s) will be used if leave empty."
-msgstr ""
-"Kích thước hình ảnh tối đa (định dạng KB). Kích thước hình ảnh tối đa mặc "
-"định (%s) sẽ được sử dụng nếu để trống."
-
-#: custom/inc/class-plugin-admin.php:357
-msgid "Max Image Size"
-msgstr "Kích thước hình ảnh tối đa"
-
-#: custom/inc/class-plugin-admin.php:363
+#: custom/inc/class-plugin-admin.php:132
 msgid "Upload Description"
 msgstr "Chú thích tải lên"
 
-#: custom/inc/class-plugin-admin.php:391
-msgid "Are you sure you want to delete?"
-msgstr "Bạn có chắc là muốn xóa hay không?"
+#~ msgid "Shop order"
+#~ msgstr "Đơn hàng"
 
-#: custom/inc/class-plugin-admin.php:392
-msgid "All images have been deleted successfully."
-msgstr "Tất cả hình ảnh đã được xóa thành công."
+#~ msgid "View customer product images"
+#~ msgstr "Xem ảnh size của khách hàng"
 
-#: custom/inc/class-plugin-frontend.php:70
-msgid "Your Product Sizes"
-msgstr "Gởi ảnh Size của bạn"
+#~ msgid "View"
+#~ msgstr "Xem"
 
-#: custom/inc/class-plugin-frontend.php:165
+#~ msgid "View images"
+#~ msgstr "Xem hình ảnh"
+
+#~ msgid "Filter by order"
+#~ msgstr "Lọc theo đơn hàng"
+
+#~ msgid "-- Choose shop order --"
+#~ msgstr "-- Chọn đơn hàng --"
+
+#~ msgid "All orders"
+#~ msgstr "Tất cả đơn hàng"
+
+#~ msgid "Customer Product Sizes"
+#~ msgstr "Ảnh size của khách hàng"
+
+#~ msgid "No images found!"
+#~ msgstr "Không có hình ảnh nào được tìm thấy!"
+
+#~ msgid "The max number of images user can upload."
+#~ msgstr "Số lượng hình ảnh tối đa cho phép người dùng tải lên."
+
+#~ msgid "Max Image Count"
+#~ msgstr "Số lượng hình ảnh tối đa"
+
 #, php-format
-msgid "You cannot upload more than %s images."
-msgstr "Bạn không thể tải lên nhiều hơn %s hình ảnh."
+#~ msgid ""
+#~ "The max image size (KB). The default size (%s) will be used if leave "
+#~ "empty."
+#~ msgstr ""
+#~ "Kích thước hình ảnh tối đa (định dạng KB). Kích thước hình ảnh tối đa mặc "
+#~ "định (%s) sẽ được sử dụng nếu để trống."
 
-#: custom/inc/class-plugin-frontend.php:166
+#~ msgid "Max Image Size"
+#~ msgstr "Kích thước hình ảnh tối đa"
+
+#~ msgid "Are you sure you want to delete?"
+#~ msgstr "Bạn có chắc là muốn xóa hay không?"
+
+#~ msgid "All images have been deleted successfully."
+#~ msgstr "Tất cả hình ảnh đã được xóa thành công."
+
+#~ msgid "Your Product Sizes"
+#~ msgstr "Gởi ảnh Size của bạn"
+
 #, php-format
-msgid "You cannot upload image size larger than %s."
-msgstr "Bạn không thể tải lên hình ảnh có kích thước lớn hơn %s."
+#~ msgid "You cannot upload more than %s images."
+#~ msgstr "Bạn không thể tải lên nhiều hơn %s hình ảnh."
 
-#: custom/inc/trait-functions.php:23
-msgid "Remove all"
-msgstr "Xóa tất cả"
+#, php-format
+#~ msgid "You cannot upload image size larger than %s."
+#~ msgstr "Bạn không thể tải lên hình ảnh có kích thước lớn hơn %s."
+
+#~ msgid "Remove all"
+#~ msgstr "Xóa tất cả"
 
 #~ msgid "Tag Name"
 #~ msgstr "Tên thẻ"

@@ -3,13 +3,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! trait_exists( 'Woo_Checkout_Images_Utils' ) ) {
+if ( ! trait_exists( 'Share_Fonts_Utils' ) ) {
 	// Load core utils functions
 	require_once dirname( __FILE__ ) . '/trait-utils.php';
 }
 
-abstract class Woo_Checkout_Images_Core {
-	use Woo_Checkout_Images_Utils;
+abstract class Share_Fonts_Core {
+	use Share_Fonts_Utils;
 
 	protected static $instance;
 	public $core_version = '1.0.6';

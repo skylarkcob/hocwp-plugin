@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-trait Woo_Checkout_Images_Admin_Core {
+trait Share_Fonts_Admin_Core {
 	public function admin_init_action() {
 		$this->register_setting( $this->option_name );
 	}

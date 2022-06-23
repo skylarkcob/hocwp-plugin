@@ -3,13 +3,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! trait_exists( 'Woo_Checkout_Images_PHP' ) ) {
+if ( ! trait_exists( 'Share_Fonts_PHP' ) ) {
 	// Load core PHP functions
 	require_once dirname( __FILE__ ) . '/trait-php.php';
 }
 
-trait Woo_Checkout_Images_Utils {
-	use Woo_Checkout_Images_PHP;
+trait Share_Fonts_Utils {
+	use Share_Fonts_PHP;
 
 	/**
 	 * Get size information for all currently-registered image sizes.

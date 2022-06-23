@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Woo_Checkout_Images_Meta_Boxes {
+class Share_Fonts_Meta_Boxes {
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes_action' ) );
 		add_action( 'save_post', array( $this, 'save_post_action' ) );
@@ -18,4 +18,4 @@ class Woo_Checkout_Images_Meta_Boxes {
 	}
 }
 
-new Woo_Checkout_Images_Meta_Boxes();
+new Share_Fonts_Meta_Boxes();

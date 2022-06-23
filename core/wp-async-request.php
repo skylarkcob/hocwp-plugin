@@ -10,7 +10,7 @@
  *
  * @abstract
  */
-abstract class Woo_Checkout_Images_Async_Request {
+abstract class Share_Fonts_Async_Request {
 	/**
 	 * Prefix
 	 *

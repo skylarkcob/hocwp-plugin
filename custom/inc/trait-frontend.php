@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! trait_exists( 'Woo_Checkout_Images_Custom' ) ) {
+if ( ! trait_exists( 'Share_Fonts_Custom' ) ) {
 	// Load custom functions
 	require_once dirname( __FILE__ ) . '/trait-functions.php';
 }
 
-trait Woo_Checkout_Images_Frontend_Custom {
-	use Woo_Checkout_Images_Custom;
+trait Share_Fonts_Frontend_Custom {
+	use Share_Fonts_Custom;
 }
